@@ -1,4 +1,5 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const path = require('path');
 
 const htmlPlugin = new HtmlWebPackPlugin({
     template: "./src/index.html",
@@ -11,7 +12,7 @@ const CSSModuleLoader = {
         modules: true,
         sourceMap: true,
         localIdentName: '[local]__[hash:base64:5]',
-        minimize: true
+        //minimize: true
     }
 }
 
@@ -20,7 +21,7 @@ const CSSLoader = {
     options: {
         modules: false,
         sourceMap: true,
-        minimize: true
+        //minimize: true
     }
 }
 
@@ -38,19 +39,8 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [
-                    {
-                        loader: "style-loader"
-                    },
-                    {
-                        loader: "css-loader",
-                        options: {
-                            modules: true,
-                            importLoaders: 1,
-                            localIdentName: "[name]_[local]_[hash:base64]",
-                            sourceMap: true,
-                            //minimize: true
-                        }
-                    }
+                    'style-loader',
+                    'css-loader'
                 ]
             },
             {
@@ -65,6 +55,15 @@ module.exports = {
                     CSSModuleLoader,
                     'sass-loader',
                 ]
+            },
+            {
+                test: /\.(png|jpg|gif|svg)$/,
+                use: [
+                  {
+                    loader: 'file-loader',
+                    options: {},
+                  },
+                ],
             }
         ]
     },
