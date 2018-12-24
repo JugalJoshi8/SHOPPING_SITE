@@ -1,11 +1,3 @@
-.hidden-label {
-  position: absolute;
-  left: -10000px;
-  top: auto;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-}
 
 .block {
   display: block;
@@ -138,10 +130,6 @@
   .pl#{$i} {
     padding-left: #{$i}rem;
   }
-}
-
-.invalid {
-  border: solid 2px red !important;
 }
 
 .hide {

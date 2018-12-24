@@ -54,35 +54,35 @@ export default class Input {
         switch (this.type) {
             case 'first-name':
                 markup = `
-                <label class = 'hidden-label' for="first-name">First Name</label>
+                <label id = label-${this.type} class = 'label--hidden label' for="first-name">First Name</label>
                 <input class = 'bold-txt input block mb1 p1' placeholder = 'First Name' id = ${this.type} name = 'first-name' type="text">
                 <div class = 'invalid-${this.type} hide mb1'>Please Enter First Name</div>
                 `;
                 break;
             case 'last-name':
                 markup = `
-                <label class = 'hidden-label' for="last-name">Last Name</label>
+                <label id = label-${this.type} class = 'label--hidden label' for="last-name">Last Name</label>
                 <input class = 'bold-txt input block mb1 p1' placeholder = 'Last Name' id = ${this.type} name = 'last-name' type="text">
                 <div class = 'invalid-${this.type} hide mb1'>Please Enter Last Name</div>
                 `;
                 break;
             case 'email':
                 markup = `
-                <label class = 'hidden-label' for="email">Email</label>
+                <label id = label-${this.type} class = 'label--hidden label' for="email">Email</label>
                 <input class = 'bold-txt input block mb1 p1' placeholder = 'Email' id = ${this.type} name = 'email' type="email">
                 <div class = 'invalid-${this.type} hide mb1'>Please Enter Valid Email</div>
                 `;
                 break;
             case 'password':
                 markup = `
-                    <label class = 'hidden-label' for="password" >Password</label>
+                    <label id = label-${this.type} class = 'label--hidden label' for="password" >Password</label>
                     <input  id = ${this.type} name = 'password' class = 'p1 input mb1 bold-txt' placeholder = 'Password' type="password">
                     <div class = 'invalid-${this.type} hide mb1'>Password must be between 6-14 characters</div>
                 `;
                 break;
             case 'confirm-password':
                 markup = `
-                    <label class = 'hidden-label' for="confirm-password" name = 'password'>Confirm Password</label>
+                    <label id = label-${this.type} class = 'label--hidden label' for="confirm-password" name = 'password'>Confirm Password</label>
                     <input  id = ${this.type} name = 'confirm-password' class = 'p1 input mb1 bold-txt' placeholder = 'Confirm Password' type="password">
                     <div class = 'invalid-${this.type} hide mb1'>Passwords do not match</div>
                 `;
@@ -98,6 +98,7 @@ export default class Input {
         this.parent.append(markup);
         this.input = $(`#${this.type}`);
         this.invalidInput = $(`.invalid-${this.type}`);
+        this.label = $(`#label-${this.type}`);
         if (this.minlength) {
             this.input.attr('minlength', this.minlength);
         }
@@ -106,9 +107,11 @@ export default class Input {
         }
         this.input.on('focus', e => {
             this.input.removeClass('invalid');
+            this.label.removeClass('label--hidden');
         });
         this.input.on('blur', e => {
             this.checkForValidation();
+            this.label.addClass('label--hidden');
         });
         return this.input;
     }

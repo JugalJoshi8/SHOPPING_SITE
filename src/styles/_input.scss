@@ -21,3 +21,20 @@
         }
     }
 }
+
+.label {
+    color: $input-focus-color;
+    display: block;
+    &--hidden {
+        position: absolute;
+        left: -10000px;
+        top: auto;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+    }
+}
+
+.invalid {
+    border: solid 2px red !important;
+}
