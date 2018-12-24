@@ -46,191 +46,98 @@
 .m-half {
   margin: 0.5rem;
 }
-.m1 {
-  margin: 1rem;
-}
-
-.m2 {
-  margin: 2rem;
-}
-
-.m3 {
-  margin: 3rem;
-}
-
-.m4 {
-  margin: 4rem;
+@for $i from 1 through 5 { 
+  .m#{$i} {
+    margin: #{$i}rem;
+  }
 }
 
 .mt-half {
   margin-top: 0.5rem;
 }
-.mt1 {
-  margin-top: 1rem;
-}
 
-.mt2 {
-  margin-top: 2rem;
+@for $i from 1 through 5 {
+  .mt#{$i} {
+    margin-top: #{$i} + rem;
+  }
 }
+  
 
-.mt3 {
-  margin-top: 3rem;
-}
-
-.mt4 {
-  margin-top: 4rem;
-}
 
 .mr-half {
   margin-right: 0.5rem;
 }
-.mr1 {
-  margin-right: 1rem;
-}
-
-.mr2 {
-  margin-right: 2rem;
-}
-
-.mr3 {
-  margin-right: 3rem;
-}
-
-.mr4 {
-  margin-right: 4rem;
+@for $i from 1 through 5 { 
+  .mr#{$i} {
+    margin-right: #{$i}rem;
+  }
 }
 
 .mb-half {
   margin-bottom: 0.5rem;
 }
-.mb1 {
-  margin-bottom: 1rem;
-}
-
-.mb2 {
-  margin-bottom: 2rem;
-}
-
-.mb3 {
-  margin-bottom: 3rem;
-}
-
-.mb4 {
-  margin-bottom: 4rem;
+@for $i from 1 through 5 { 
+  .mb#{$i} {
+    margin-bottom: #{$i}rem;
+  }
 }
 
 .ml-half {
   margin-left: 0.5rem;
 }
-.ml1 {
-  margin-left: 1rem;
-}
 
-.ml2 {
-  margin-left: 2rem;
-}
-
-.ml3 {
-  margin-left: 3rem;
-}
-
-.ml4 {
-  margin-left: 4rem;
+@for $i from 1 through 5 { 
+  .ml#{$i} {
+    margin-left: #{$i}rem;
+  }
 }
 
 .p-half {
   padding: 0.5rem;
 }
-.p1 {
-  padding: 1rem;
-}
-
-.p2 {
-  padding: 2rem;
-}
-
-.p3 {
-  padding: 3rem;
-}
-
-.p4 {
-  padding: 4rem;
+@for $i from 1 through 5 { 
+  .p#{$i} {
+    padding: #{$i}rem;
+  }
 }
 
 .pt-half {
   padding-top: 0.5rem;
 }
-.pt1 {
-  padding-top: 1rem;
-}
-
-.pt2 {
-  padding-top: 2rem;
-}
-
-.pt3 {
-  padding-top: 3rem;
-}
-
-.pt4 {
-  padding-top: 4rem;
+@for $i from 1 through 5 { 
+  .pt#{$i} {
+    padding-top: #{$i}rem;
+  }
 }
 
 .pr-half {
   padding-right: 0.5rem;
 }
-.pr1 {
-  padding-right: 1rem;
-}
 
-.pr2 {
-  padding-right: 2rem;
-}
-
-.pr3 {
-  padding-right: 3rem;
-}
-
-.pr4 {
-  padding-right: 4rem;
+@for $i from 1 through 5 { 
+  .pr#{$i} {
+    padding-right: #{$i}rem;
+  }
 }
 
 .pb-half {
   padding-bottom: 0.5rem;
 }
-.pb1 {
-  padding-bottom: 1rem;
-}
 
-.pb2 {
-  padding-bottom: 2rem;
-}
-
-.pb3 {
-  padding-bottom: 3rem;
-}
-
-.pb4 {
-  padding-bottom: 4rem;
+@for $i from 1 through 5 { 
+  .pb#{$i} {
+    padding-bottom: #{$i}rem;
+  }
 }
 
 .pl-half {
   padding-left: 0.5rem;
 }
-.pl1 {
-  padding-left: 1rem;
-}
 
-.pl2 {
-  padding-left: 2rem;
-}
-
-.pl3 {
-  padding-left: 3rem;
-}
-
-.pl4 {
-  padding-left: 4rem;
+@for $i from 1 through 5 { 
+  .pl#{$i} {
+    padding-left: #{$i}rem;
+  }
 }
 
 .invalid {

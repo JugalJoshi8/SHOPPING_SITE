@@ -1,8 +1,9 @@
 
 export default class ShoppingHeader {
 
-    constructor({parent}) {
-        this.parent = parent;
+    constructor(props) {
+        this.parent = props.parent;
+        this.props = props;
         this.render();
     }
     render() {
@@ -17,8 +18,8 @@ export default class ShoppingHeader {
                 </nav>
                 <div class = cartBtnCntnr>
                     <div class = btnCntnr>
-                        <button class = cart__button>Signin</button>
-                        <button class = cart__button>Register</button>
+                        <button id = 'sign-in' class = cart__button>Signin</button>
+                        <button id = 'register' class = cart__button>Register</button>
                     </div>
                     <div class = cart>
                         <div class = cartImage></div>
@@ -28,5 +29,7 @@ export default class ShoppingHeader {
             </header>
        `;
        this.parent.append(markup);
+       $('#register').on('click', _ => this.props.onRegister && this.props.onRegister());
+       $('#sign-in').on('click', _ => this.props.onSignIn && this.props.onSignIn());
     }
 }
