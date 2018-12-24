@@ -5,6 +5,14 @@ html, body, h1, h2, h3, h4, h5, h6, p, ul, li, button {
 
 * {
     box-sizing: border-box;
+    font-family: dosis;
+}
+
+html {
+    font-size: 62.5%; //10/16
+    @include md {
+        font-size: 100%;
+    }
 }
 
 ul {

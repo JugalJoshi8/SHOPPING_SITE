@@ -1,0 +1,79 @@
+header {
+    display: flex;
+    width: 100%;
+    align-items: flex-end;
+    border: solid 1px $light;
+    padding: 1rem 5rem;
+    box-shadow: 0 2px 4px $light-grey;
+}
+
+header nav, header ul {
+    display: flex;
+}
+
+header nav {
+    margin-bottom: 1rem;
+}
+
+header li {
+    padding: 0.5rem;
+    cursor: pointer;
+    height: 30px;
+    line-height: 30px;
+    font-weight: bold;
+    color: $light-dark;
+}
+
+.logo {
+    background: url('./../assets/imgs/logo.png');
+    width: 120px;
+    height: 50px;
+    background-size: 100% 100%;
+    margin-right: 2rem;
+}
+
+.cart {
+    display: flex;
+    align-items: center;
+}
+
+.cartBtnCntnr {
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-self: stretch;
+}
+
+.cartImage {
+    background: url('./../assets/imgs/cart.svg');
+    width: 30px;
+    height: 30px;
+    background-size: 100% 100%;
+    margin-right: 0.5rem;
+}
+
+.cart {
+    background-color: $light;
+    padding: 0.5rem;
+}
+
+.cart__button {
+    border: none;
+    outline: none;
+    background: transparent;
+    &:not(:last-child) {
+        margin-right: 1rem;
+    }
+    cursor: pointer;
+    margin-bottom: 0.5rem;
+}
+
+@include md {
+    .logo {
+        background: url('./../assets/imgs/logo_2x.png');
+        width: 190px;
+        height: 86px;
+        background-size: 100% 100%;
+    }
+}

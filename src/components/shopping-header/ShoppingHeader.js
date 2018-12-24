@@ -1,28 +1,32 @@
-import React, { Component } from 'react';
-import styles from './ShoppingHeader.module.scss';
 
-export default class ShoppingHeader extends Component {
+export default class ShoppingHeader {
+
+    constructor({parent}) {
+        this.parent = parent;
+        this.render();
+    }
     render() {
-        return (
+       const markup = `
             <header>
-                <div className={styles.logo}></div>
+                <div class=logo></div>
                 <nav>
                     <ul>
                         <li>Home</li>
                         <li>Products</li>
                     </ul>
                 </nav>
-                <div className = {styles.cartBtnCntnr}>
-                    <div className={styles.btnCntnr}>
-                        <button>Signin</button>
-                        <button>Register</button>
+                <div class = cartBtnCntnr>
+                    <div class = btnCntnr>
+                        <button class = cart__button>Signin</button>
+                        <button class = cart__button>Register</button>
                     </div>
-                    <div className={styles.cart}>
-                        <div className={styles.cartImage}></div>
+                    <div class = cart>
+                        <div class = cartImage></div>
                         <div>0 items</div>
                     </div>
                 </div>
             </header>
-        )
+       `;
+       this.parent.append(markup);
     }
 }

@@ -1,0 +1,21 @@
+
+.login {
+    width: 100%;
+}
+
+#header-cntr {
+    width: 100%;
+}
+
+.login-form__input {
+    width: 300px;
+    outline: none;
+    border: none;
+    border-bottom: solid 1px $light;
+    height: 40px;
+    &--submit {
+        border: none;
+        background-color: $primary;
+        cursor: pointer;
+    }
+}

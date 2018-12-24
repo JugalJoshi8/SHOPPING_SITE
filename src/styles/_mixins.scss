@@ -1,0 +1,11 @@
+@mixin md() {
+    @media only screen and (min-width: $md-screen-min) {
+        @content;
+    }
+}
+
+@mixin lg() {
+    @media only screen and (min-width: $lg-screen-min) {
+        @content;
+    }
+}

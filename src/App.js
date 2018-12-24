@@ -1,13 +1,21 @@
-import React, { Component } from 'react';
 import Login from './components/login/Login';
+import './styles/styles.scss';
 
-class App extends Component {
+class App {
+  constructor({parent}) {
+    this.parent = parent;
+    this.render();
+  }
+
   render() {
-    return (
-        <div className="App">
-          <Login />
+    const markup =  `
+        <div class="app">
+          <div id="login-cntr">
+          </div>
         </div>
-    );
+    `;
+    this.parent.append(markup);
+    new Login({parent: $('#login-cntr')});
   }
 }
 
