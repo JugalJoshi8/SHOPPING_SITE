@@ -37,12 +37,12 @@ export default class Login {
 
     render() {
         const markup = `
-            <div class = 'login flex flex--v' >
+            <section class = 'login flex flex--v' >
                <div id = header-cntr></div>
                <div class="login__content flex p2 flex--jc flex--v">
                 <div class = 'mr3'>
-                    <div class = 'lg-txt bold-txt mb1'>Login</div>
-                    <div>Get access to your Orders, Wishlist and Recommendations</div>
+                    <h1 class = 'lg-txt bold-txt mb1'>Login</h1>
+                    <h2>Get access to your Orders, Wishlist and Recommendations</h2>
                 </div>
                 <form class = 'login-form'>
                     <div class = 'email-cntr'>
@@ -57,7 +57,7 @@ export default class Login {
                 </form>
                </div>
                <footer class = 'pr5 pl5' ></footer>
-            </div>
+            </section>
             `;
         this.parent.innerHTML = markup;
         new ShoppingHeader({parent: this.parent.querySelector('#header-cntr'), onRegister: _ => this.props.onRegister()});

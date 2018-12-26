@@ -32,7 +32,7 @@ export default class SignUp {
 
     render() {
         const markup = `
-            <div class = 'signup flex flex--v' >
+            <section class = 'signup flex flex--v' >
                <div id = header-cntr></div>
                <div class="signup__content flex p2 flex--jc flex--v">
                 <div class = 'mr3'>
@@ -61,7 +61,7 @@ export default class SignUp {
                 </form>
                </div>
                <footer class = 'pr5 pl5' ></footer>
-            </div>
+            </section>
             `;
         this.parent.innerHTML = markup;
         new ShoppingHeader({ parent: this.parent.querySelector('#header-cntr'), onSignIn: _ => this.props.onSignIn() });

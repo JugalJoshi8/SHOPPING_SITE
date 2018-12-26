@@ -18,11 +18,11 @@ export default class HomePage {
 
     render() {
         const markup = `
-            <div id = 'home-page'>
-                <div id = 'header-cntr'></div>
-                <div id = 'carousel-cntr'></div>
+            <section id = 'home-page'>
+                <section id = 'header-cntr'></section>
+                <section id = 'carousel-cntr'></section>
                 <footer class = 'pr5 pl5' ></footer>
-            </div>
+            </section>
         `;
         this.parent.innerHTML = markup;
         new ShoppingHeader({parent: this.parent.querySelector('#header-cntr'), onRegister: _ => this.props.onRegister()});

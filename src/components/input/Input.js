@@ -9,18 +9,20 @@ export default class Input {
         this.maxlength = props.maxlength;
         this.props = props;
         this.render();
-        addEvents({
-            'input': {
-                'focus': e => {
-                    this.input.classList.remove('invalid');
-                    this.label.classList.remove('label--hidden');
-                },
-                'blur': e => {
-                    this.checkForValidation();
-                    this.label.classList.add('label--hidden');
+        if(this.type !== 'submit') {
+            addEvents({
+                'input': {
+                    'focus': e => {
+                        this.input.classList.remove('invalid');
+                        this.label.classList.remove('label--hidden');
+                    },
+                    'blur': e => {
+                        this.checkForValidation();
+                        this.label.classList.add('label--hidden');
+                    }
                 }
-            }
-        }, this.parent);
+            }, this.parent);
+        }
         return this;
     }
 

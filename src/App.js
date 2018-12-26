@@ -33,8 +33,8 @@ class App {
     `;
     this.parent.innerHTML = markup;
     this.childContainer = document.querySelector('#child-cntr');
-    //new Login({parent: this.childContainer, onLoginSuccess: _ => this.onLoginSuccess(), onRegister: _ => this.onRegister()});
-    this.onLoginSuccess();
+    new Login({parent: this.childContainer, onLoginSuccess: _ => this.onLoginSuccess(), onRegister: _ => this.onRegister()});
+    //this.onLoginSuccess();
   }
 }
 

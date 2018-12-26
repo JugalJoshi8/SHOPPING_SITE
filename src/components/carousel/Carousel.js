@@ -66,7 +66,6 @@ export default class Carousel {
     }
 
     onNavClick(isPrev) {
-        debugger;
         const translateBy = this.carouselParent.offsetWidth;
         if(isPrev) {
             if(this.currentSlide === 0) {
@@ -82,6 +81,8 @@ export default class Carousel {
         }
         this.showHideNav();
         this.carousel.style.left = `-${this.currentSlide * translateBy}px`;
+        this.stopAnimation();
+        this.startAnimation();
     }
 
     showHideNav() {

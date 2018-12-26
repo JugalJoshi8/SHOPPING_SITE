@@ -10,7 +10,7 @@ export default class Banner {
         
         const markup = `
             <div class = 'banner' id = 'banner-${this.props.key}'>
-                <img class = 'banner__img' src = dist${this.banner.bannerImageUrl}>
+                <img class = 'banner__img' src = dist${this.banner.bannerImageUrl} alt ='${this.banner.bannerImageAlt}'>
             </div>
         `;
         this.parent.innerHTML += markup;
