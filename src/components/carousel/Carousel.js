@@ -21,10 +21,10 @@ export default class Carousel {
                 handler: _ => this.onNavClick(false)
             },
             '.carousel': {
-                //'mouseenter': _ => this.stopAnimation(),
+                'mouseenter': _ => this.stopAnimation(),
                 'touchstart': e => this.stopAnimation(e),
                 'touchmove': e => this.onTouchMove(e),
-               // 'mouseleave': _ => this.startAnimation(),
+                'mouseleave': _ => this.startAnimation(),
                 'touchend': e => this.startAnimation(e)
             }
         }, this.props.parent);
@@ -81,8 +81,6 @@ export default class Carousel {
         }
         this.showHideNav();
         this.carousel.style.left = `-${this.currentSlide * translateBy}px`;
-        this.stopAnimation();
-        this.startAnimation();
     }
 
     showHideNav() {

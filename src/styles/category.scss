@@ -1,0 +1,20 @@
+.category {
+    height: 200px;
+    @include md {
+        height: 250px;
+    }
+    &__img {
+        width: 30%;
+        display: block;
+        @include md {
+            width: 30%;
+            height: 100%;
+        }
+    }
+    &__details {
+        max-width: 40%;
+    }
+    &:nth-child(2n) {
+        flex-direction: row-reverse;
+    }
+}

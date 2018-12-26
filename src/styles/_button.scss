@@ -1,0 +1,21 @@
+.button {
+    width: 100%;
+    outline: none;
+    border: none;
+    height: 40px;
+    @include md {
+        width: 300px;
+        max-width: 100%;
+    }
+    &--primary {
+        border: none;
+        background-color: $primary;
+        color: $white;
+        cursor: pointer;
+        transition: transform 0.1s ease-in;
+        &:hover, &:focus {
+            transform: translateY(-1px);
+            background-color: $primary-hover;
+        }
+    }
+}
