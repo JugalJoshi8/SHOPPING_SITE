@@ -8,7 +8,7 @@ export default class Category {
     render() {
         const markup = `
             <section class = 'category flex flex--ac p2 flex--jsa'>
-                <img class = 'category__img' src = dist${this.category.imageUrl}>
+                <img class = 'category__img' src = dist${this.category.imageUrl} alt = '${this.category.name}'>
                 <div class = 'category__details flex flex--v flex--ac'>
                     <h2 class = 'mb1'>${this.category.name}</h2>
                     <h3 class = 'mb2 normal-txt'>${this.category.description}</h2>
