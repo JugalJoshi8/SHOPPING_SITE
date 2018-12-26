@@ -1,10 +1,18 @@
+import ajaxService from './AJAXService';
 export default class ShoppingService {
     constructor(url) {
 
     }
 
     getBanners() {
-        
-        $.get('url' + 'banners');
+        return ajaxService.get('banners');
+    }
+
+    getCategories() {
+        return ajaxService.get('categories');
+    }
+
+    getHomePageInfo() {
+        return Promise.all([this.getBanners(), this.getCategories()]);
     }
 }

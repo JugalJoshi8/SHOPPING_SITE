@@ -31,9 +31,9 @@ module.exports = {
             {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
-                use: {
-                    loader: "babel-loader"
-                }
+                use: [
+                    "babel-loader"
+                ]
             },
             {
                 test: /\.css$/,
@@ -56,11 +56,13 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(png|jpg|gif|svg)$/,
+                test: /\.(png|jpg|gif|svg|jpeg)$/,
                 use: [
                   {
                     loader: 'file-loader',
-                    options: {},
+                    options: {
+                        name: '[path][name].[ext]',
+                    }
                   },
                 ],
             }

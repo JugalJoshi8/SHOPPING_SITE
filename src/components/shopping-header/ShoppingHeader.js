@@ -1,10 +1,20 @@
-
+import {addEvents} from './../../services/Utils';
 export default class ShoppingHeader {
 
     constructor(props) {
         this.parent = props.parent;
         this.props = props;
         this.render();
+        addEvents({
+            '#register': {
+                name: 'click',
+                handler: _ => this.props.onRegister && this.props.onRegister()
+            },
+            '#sign-in': {
+                name: 'click',
+                handler: _ => this.props.onSignIn && this.props.onSignIn() 
+            }
+        }, this.parent);
     }
     render() {
        const markup = `
@@ -29,7 +39,5 @@ export default class ShoppingHeader {
             </header>
        `;
        this.parent.innerHTML = markup;
-       $('#register').on('click', _ => this.props.onRegister && this.props.onRegister());
-       $('#sign-in').on('click', _ => this.props.onSignIn && this.props.onSignIn());
     }
 }

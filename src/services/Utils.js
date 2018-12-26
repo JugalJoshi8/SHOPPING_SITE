@@ -15,7 +15,7 @@ export const addEvents = (elements, parent) => {
         // if multiple events are there for 1 selector
         else {
             for(let eventName in event) {
-                parent.querySelector(element).addEventListener(eventName, eventName.handler);
+                parent.querySelector(element).addEventListener(eventName, event[eventName]);
             }
         }
     }
