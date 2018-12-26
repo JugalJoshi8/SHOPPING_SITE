@@ -1,5 +1,5 @@
 
 import App from './App';
 
-new App({parent: $('#root')});
+new App({parent: document.querySelector('#root')});
 

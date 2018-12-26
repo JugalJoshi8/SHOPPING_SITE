@@ -28,7 +28,7 @@ export default class ShoppingHeader {
                 </div>
             </header>
        `;
-       this.parent.append(markup);
+       this.parent.innerHTML = markup;
        $('#register').on('click', _ => this.props.onRegister && this.props.onRegister());
        $('#sign-in').on('click', _ => this.props.onSignIn && this.props.onSignIn());
     }

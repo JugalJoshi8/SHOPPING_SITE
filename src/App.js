@@ -10,18 +10,18 @@ class App {
   }
 
   onLoginSuccess() {
-    this.childContainer.empty();
-    new HomePage({parent: $('#child-cntr')});
+    this.childContainer.innerHTML = '';
+    new HomePage({parent: this.childContainer});
   }
 
   onRegister() {
-    this.childContainer.empty();
-    new SignUp({parent: $('#child-cntr'), onLoginSuccess: _ => this.onLoginSuccess(),  onSignIn: _ => this.onSignIn()});
+    this.childContainer.innerHTML = '';
+    new SignUp({parent: this.childContainer, onLoginSuccess: _ => this.onLoginSuccess(),  onSignIn: _ => this.onSignIn()});
   }
 
   onSignIn() {
-    this.childContainer.empty();
-    new Login({parent: $('#child-cntr'), onLoginSuccess: _ => this.onLoginSuccess(), onRegister: _ => this.onRegister()});
+    this.childContainer.innerHTML = '';
+    new Login({parent: this.childContainer, onLoginSuccess: _ => this.onLoginSuccess(), onRegister: _ => this.onRegister()});
   }
 
   render() {
@@ -31,9 +31,9 @@ class App {
           </div>
         </div>
     `;
-    this.parent.append(markup);
-    this.childContainer = $('#child-cntr');
-    new Login({parent: $('#child-cntr'), onLoginSuccess: _ => this.onLoginSuccess(), onRegister: _ => this.onRegister()});
+    this.parent.innerHTML = markup;
+    this.childContainer = document.querySelector('#child-cntr');
+    new Login({parent: this.childContainer, onLoginSuccess: _ => this.onLoginSuccess(), onRegister: _ => this.onRegister()});
   }
 }
 

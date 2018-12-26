@@ -10,6 +10,6 @@ export default class ShoppingFooter {
                 Copyright &copy; 2011-${new Date().getFullYear()} Sabka Bazaar Grocery Supplies Pvt Ltd
             </div>
         `;
-        this.parent.append(markup);
+        this.parent.innerHTML = markup;
     }
 }

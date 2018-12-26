@@ -1,4 +1,4 @@
-import { validateEmail} from './../../utils/Utils';
+import { validateEmail, addEvents} from './../../services/Utils';
 
 export default class Input {
     constructor(props) {
@@ -9,27 +9,39 @@ export default class Input {
         this.maxlength = props.maxlength;
         this.props = props;
         this.render();
+        addEvents({
+            'input': {
+                'focus': e => {
+                    this.input.classList.remove('invalid');
+                    this.label.classList.remove('label--hidden');
+                },
+                'blur': e => {
+                    this.checkForValidation();
+                    this.label.classList.add('label--hidden');
+                }
+            }
+        }, this.parent);
         return this;
     }
 
     val() {
-        return this.input.val();
+        return this.input.value;
     }
 
     isValid() {
-        if (this.type === 'email' && !validateEmail(this.input.val())) {
+        if (this.type === 'email' && !validateEmail(this.input.value)) {
             return false;
         }
-        if (this.minlength && this.input.val().length < this.minlength) {
+        if (this.minlength && this.input.value.length < this.minlength) {
             return false;
         }
-        if (this.maxlength && this.input.val().length > this.maxlength) {
+        if (this.maxlength && this.input.value.length > this.maxlength) {
             return false;
         }
-        if(this.input.val().trim().length < 1) {
+        if(this.input.value.trim().length < 1) {
             return false;
         }
-        if(this.type === 'confirm-password' && this.input.val() !== this.props.passwordInput.val()) {
+        if(this.type === 'confirm-password' && this.input.value !== this.props.passwordInput.val()) {
             return false;
         }
         return true;
@@ -37,13 +49,13 @@ export default class Input {
 
     checkForValidation() {
         if (this.isValid()) {
-            this.input.removeClass('invalid');
-            this.invalidInput.addClass('hide');
+            this.input.classList.remove('invalid');
+            this.invalidInput.classList.add('hide');
             return true;
         }
         else {
-            this.input.addClass('invalid');
-            this.invalidInput.removeClass('hide');
+            this.input.classList.add('invalid');
+            this.invalidInput.classList.remove('hide');
             return false;
         }
 
@@ -95,24 +107,16 @@ export default class Input {
             default:
                 break;
         }
-        this.parent.append(markup);
-        this.input = $(`#${this.type}`);
-        this.invalidInput = $(`.invalid-${this.type}`);
-        this.label = $(`#label-${this.type}`);
+        this.parent.innerHTML = markup
+        this.input = this.parent.querySelector(`#${this.type}`);
+        this.invalidInput = this.parent.querySelector(`.invalid-${this.type}`);
+        this.label = this.parent.querySelector(`#label-${this.type}`);
         if (this.minlength) {
-            this.input.attr('minlength', this.minlength);
+            this.input.setAttribute('minlength', this.minlength);
         }
         if (this.maxlength) {
-            this.input.attr('maxlength', this.maxlength);
+            this.input.setAttribute('maxlength', this.maxlength);
         }
-        this.input.on('focus', e => {
-            this.input.removeClass('invalid');
-            this.label.removeClass('label--hidden');
-        });
-        this.input.on('blur', e => {
-            this.checkForValidation();
-            this.label.addClass('label--hidden');
-        });
         return this.input;
     }
 }

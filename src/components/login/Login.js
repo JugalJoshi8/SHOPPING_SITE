@@ -3,12 +3,32 @@ import ShoppingHeader from './../shopping-header/ShoppingHeader';
 import ShoppingFooter from './../shopping-footer/ShoppingFooter';
 import Input from './../input/Input'; 
 import SignUp from './../sign-up/SignUp';
+import {addEvents} from './../../services/Utils';
 
 export default class Login {
     constructor(props) {
         this.parent = props.parent;
         this.props = props;
         this.render();
+        this.onFormSubmit = this.onFormSubmit.bind(this);
+        addEvents({
+            '.login-form' : {
+                'name': 'submit',
+                'handler': this.onFormSubmit
+            }
+        }, this.parent);
+    }
+
+    onFormSubmit(e) {
+        e.preventDefault();
+        let isFormValid = true;
+        this.inputs.forEach(input => {
+            const isInputValid = input.checkForValidation();
+            isFormValid = isFormValid && isInputValid;
+        });
+        if(isFormValid) {
+            this.props.onLoginSuccess();
+        }
     }
 
     onRegister() {
@@ -39,23 +59,12 @@ export default class Login {
                <footer class = 'pr5 pl5' ></footer>
             </div>
             `;
-        this.parent.append(markup);
-        new ShoppingHeader({parent: $('#header-cntr'), onRegister: _ => this.props.onRegister()});
-        new ShoppingFooter({parent: $('footer')});
+        this.parent.innerHTML = markup;
+        new ShoppingHeader({parent: this.parent.querySelector('#header-cntr'), onRegister: _ => this.props.onRegister()});
+        new ShoppingFooter({parent: this.parent.querySelector('footer')});
         this.inputs = [];
-        this.inputs.push(new Input({type: 'email', parent: $('.email-cntr')}));
-        this.inputs.push(new Input({type: 'password', parent: $('.password-cntr'), minlength: 6, maxlength: 14}));
-        new Input({type: 'submit', parent: $('.submit-cntr'), value: 'Login'});
-        $('.login-form').on('submit', e => {
-            e.preventDefault();
-            let isFormValid = true;
-            this.inputs.forEach(input => {
-                const isInputValid = input.checkForValidation();
-                isFormValid = isFormValid && isInputValid;
-            });
-            if(isFormValid) {
-                this.props.onLoginSuccess();
-            }
-        })
+        this.inputs.push(new Input({type: 'email', parent: this.parent.querySelector('.email-cntr')}));
+        this.inputs.push(new Input({type: 'password', parent: this.parent.querySelector('.password-cntr'), minlength: 6, maxlength: 14}));
+        new Input({type: 'submit', parent: this.parent.querySelector('.submit-cntr'), value: 'Login'});
     }
 }

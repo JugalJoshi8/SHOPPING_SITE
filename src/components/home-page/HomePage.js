@@ -8,6 +8,6 @@ export default class HomePage {
         const markup = `
             <div>Home Page</div>
         `;
-        this.props.parent.append(markup);
+        this.props.parent.innerHTML = markup;
     }
 }
