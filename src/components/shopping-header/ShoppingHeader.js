@@ -13,6 +13,14 @@ export default class ShoppingHeader {
             '#sign-in': {
                 name: 'click',
                 handler: _ => this.props.onSignIn && this.props.onSignIn() 
+            },
+            '#home': {
+                name: 'click',
+                handler: _ => this.props.onHomeClick && this.props.onHomeClick()
+            },
+            '#products': {
+                name: 'click',
+                handler: _ => this.props.onProductsClick && this.props.onProductsClick() 
             }
         }, this.parent);
     }
@@ -22,8 +30,8 @@ export default class ShoppingHeader {
                 <div class=logo></div>
                 <nav>
                     <ul>
-                        <li>Home</li>
-                        <li>Products</li>
+                        <li id = 'home'>Home</li>
+                        <li id = 'products'>Products</li>
                     </ul>
                 </nav>
                 <div class = cartBtnCntnr>

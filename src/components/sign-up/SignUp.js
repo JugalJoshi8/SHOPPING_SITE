@@ -64,7 +64,7 @@ export default class SignUp {
             </section>
             `;
         this.parent.innerHTML = markup;
-        new ShoppingHeader({ parent: this.parent.querySelector('#header-cntr'), onSignIn: _ => this.props.onSignIn() });
+        new ShoppingHeader({ ...this.props, parent: this.parent.querySelector('#header-cntr')});
         new ShoppingFooter({ parent: this.parent.querySelector('footer') });
         this.inputs = [];
         this.inputs.push(new Input({ type: 'first-name', parent: this.parent.querySelector('.first-name-cntr') }));

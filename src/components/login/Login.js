@@ -60,7 +60,7 @@ export default class Login {
             </section>
             `;
         this.parent.innerHTML = markup;
-        new ShoppingHeader({parent: this.parent.querySelector('#header-cntr'), onRegister: _ => this.props.onRegister()});
+        new ShoppingHeader({...this.props, parent: this.parent.querySelector('#header-cntr')});
         new ShoppingFooter({parent: this.parent.querySelector('footer')});
         this.inputs = [];
         this.inputs.push(new Input({type: 'email', parent: this.parent.querySelector('.email-cntr')}));

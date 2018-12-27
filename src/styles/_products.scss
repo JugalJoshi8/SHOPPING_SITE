@@ -1,0 +1,6 @@
+#product-cntr {
+    flex-wrap: wrap;
+    &>* {
+        width: 25%
+    }
+}

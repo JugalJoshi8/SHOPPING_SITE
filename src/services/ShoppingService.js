@@ -15,4 +15,8 @@ export default class ShoppingService {
     getHomePageInfo() {
         return Promise.all([this.getBanners(), this.getCategories()]);
     }
+
+    getProducts() {
+        return ajaxService.get('products');
+    }
 }
