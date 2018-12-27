@@ -9,7 +9,7 @@ html, body, h1, h2, h3, h4, h5, h6, p, ul, li, button {
 }
 
 html {
-    font-size: 62.5%; //10/16
+    font-size: 80%;
     @include md {
         font-size: 100%;
     }
