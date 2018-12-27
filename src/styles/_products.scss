@@ -31,13 +31,13 @@
             top: 0;
             left: 0;
             right: 0;
-            width: 0;
+            transform: scaleY(0);
             height: 0;
-            overflow: hidden;
-            transition: all 0.2s ease-in;
+            transform-origin: top;
+            transition: transform 0.2s ease-in;
             &.show-options {
+                transform: scaleY(1);
                 height: auto;
-                width: auto;
             }
             &__option {
                 border-bottom: solid 1px #ccc;

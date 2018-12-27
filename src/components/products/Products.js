@@ -28,26 +28,37 @@ export default class Products {
                 '.category-list__option': {
                     name: 'click',
                     handler: e => this.onCategoryDropdownSelect(e)
+                },
+                '.products': {
+                    name: 'click',
+                    handler: e => this.hideCategoryDropdown()
                 }
             }, this.parent);
         });
     }
 
-    onCategoryDropdownClick() {
+    hideCategoryDropdown() {
+        if(this.categorySelect.getAttribute('aria-expanded')) {
+            this.categorySelect.setAttribute('aria-expanded', false);
+            this.categoryOptions.classList.remove('show-options');
+        }
+    }
+
+    onCategoryDropdownClick(e) {
+        e.stopPropagation();
         const isExpanded = this.categorySelect.getAttribute('aria-expanded');
         if(isExpanded === "false") {
             this.categorySelect.setAttribute('aria-expanded', true);
             this.categoryOptions.classList.add('show-options');
         }
         else {
-            this.categorySelect.setAttribute('aria-expanded', false);
-            this.categoryOptions.classList.remove('show-options');
+            this.hideCategoryDropdown();
         }
     }
 
     onCategoryDropdownSelect(e) {
-        this.categorySelect.setAttribute('aria-expanded', false);
-        this.categoryOptions.classList.remove('show-options');
+        e.stopPropagation();
+        this.hideCategoryDropdown();
         this.onCategorySelect(e);
         this.categorySelect.innerText = e.target.innerHTML;
     }
