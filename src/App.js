@@ -37,7 +37,7 @@ class App {
 
   render() {
     const markup =  `
-        <div class="app">
+        <div class="app p1">
           <div id="child-cntr">
           </div>
         </div>

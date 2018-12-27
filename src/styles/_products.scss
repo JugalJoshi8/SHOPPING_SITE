@@ -1,6 +1,23 @@
 #product-cntr {
     flex-wrap: wrap;
     &>* {
-        width: 25%
+        width: 100%;
+        @include md {
+            width: 50%;
+        }
+        @include lg {
+            width: 25%
+        }
+    }
+}
+
+.category-list {
+    height: 100%;
+    background-color: $light;
+    &__item {
+        padding: 1rem 2rem;
+        border-bottom: solid 1px #ccc;
+        color: $light-dark;
+        cursor: pointer;
     }
 }

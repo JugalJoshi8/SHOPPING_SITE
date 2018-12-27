@@ -47,6 +47,14 @@
   align-items: stretch;
 }
 
+@for $i from 1 through 5 { 
+  .flex#{$i} {
+    flex: #{$i};
+  }
+}
+
+
+
 .m-half {
   margin: 0.5rem;
 }
@@ -146,4 +154,32 @@
 
 .hide {
   display: none;
+}
+
+.black-bg {
+  background-color: $black;
+}
+
+.dark-bg {
+  background-color: $dark;
+}
+
+.light-dark-bg {
+  background-color: $light-dark;
+}
+
+.grey-bg {
+  background-color: $grey;
+}
+
+.light-grey-bg {
+  background-color: $light-grey;
+}
+
+.light-bg {
+  background-color: $light;
+}
+
+.white-bg {
+  color: $white;
 }

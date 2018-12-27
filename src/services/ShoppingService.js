@@ -9,7 +9,10 @@ export default class ShoppingService {
     }
 
     getCategories() {
-        return ajaxService.get('categories');
+        return this.categories || ajaxService.get('categories').then(res => {
+            this.categories = res.data;
+            return res;
+        });
     }
 
     getHomePageInfo() {
@@ -18,5 +21,9 @@ export default class ShoppingService {
 
     getProducts() {
         return ajaxService.get('products');
+    }
+
+    getProductsPageInfo() {
+        return Promise.all([this.getProducts(), this.getCategories()]);
     }
 }

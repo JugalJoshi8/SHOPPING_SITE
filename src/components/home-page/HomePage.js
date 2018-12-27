@@ -23,7 +23,7 @@ export default class HomePage {
                 <section id = 'header-cntr'></section>
                 <section id = 'carousel-cntr'></section>
                 <section id = 'category-cntr'></section>
-                <footer class = 'pr5 pl5 center-txt' ></footer>
+                <footer class = 'center-txt pl1 light-bg' ></footer>
             </article>
         `;
         this.parent.innerHTML = markup;
