@@ -64,6 +64,8 @@ export default class Products {
     }
 
     onCategorySelect(e) {
+        this.categoryOptions.querySelectorAll('li').forEach(li => li.setAttribute('aria-selected', false));
+        e.target.setAttribute('aria-selected', true);
         const categoryId = e.target.getAttribute('category-id');
         this.filteredProducts = this.products.filter(product => product.category === categoryId);
         this.productCntr.innerHTML = '';
@@ -76,9 +78,9 @@ export default class Products {
         const markup = `
             <article id = 'home-page' class = 'products'>
                 <section id = 'header-cntr'></section>
-                <div id = 'category-select' tabindex="0" aria-autocomplete="none" class = 'button button--primary category__select' role="combobox" aria-owns="category-list" aria-expanded="false" aria-label="Select a Category">Select a Category</div>
+                <div aria-haspopup="listbox" id = 'category-select' tabindex="0" aria-autocomplete="none" class = 'button button--primary category__select' role="combobox" aria-owns="category-list" aria-expanded="false" aria-labelledby="category-select">Select a Category</div>
                 <div class = 'category-options'>
-                    <ul id = 'category-list' class = 'category-list'>
+                    <ul  role="listbox" id = 'category-list' class = 'category-list' aria-label = 'Select a Category'>
                         ${this.categories.map(category => `<li role="option" category-id = ${category.id} class = "light-bg p1 lg-txt category-list__option bold-txt">${category.name}</li>`).join('')}
                     </ul>
                 </div>
