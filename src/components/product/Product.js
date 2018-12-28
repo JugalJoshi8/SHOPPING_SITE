@@ -1,7 +1,15 @@
+import {addEvents} from './../../services/Utils';
+
 export default class Product {
     constructor(props) {
         this.props = props;
         this.render();
+        addEvents({
+            'button': {
+                name: 'click',
+                handler: _ => this.props.addProductToCart(this.props.product)
+            }
+        }, this.props.parent);
     }
 
     render() {

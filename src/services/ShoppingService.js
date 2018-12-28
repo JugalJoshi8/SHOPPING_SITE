@@ -1,7 +1,7 @@
 import ajaxService from './AJAXService';
 export default class ShoppingService {
     constructor(url) {
-
+        this.cartProducts = [];
     }
 
     getBanners() {
@@ -25,5 +25,19 @@ export default class ShoppingService {
 
     getProductsPageInfo() {
         return Promise.all([this.getProducts(), this.getCategories()]);
+    }
+
+    getCartIProducts() {
+        return this.cartProducts;
+    }
+
+    addProductToCart(item) {
+        ajaxService.post('/addToCart', item)
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
     }
 }

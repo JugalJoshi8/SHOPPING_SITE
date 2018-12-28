@@ -42,7 +42,10 @@
             &__option {
                 border-bottom: solid 1px #ccc;
                 color: #666;
-                cursor: pointer
+                cursor: pointer;
+                &.selected {
+                    background: skyblue;
+                }
             }
         }
 
@@ -72,5 +75,8 @@
         border-bottom: solid 1px #ccc;
         color: $light-dark;
         cursor: pointer;
+        &.selected {
+            background: skyblue;
+        }
     }
 }

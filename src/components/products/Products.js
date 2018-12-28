@@ -9,6 +9,7 @@ export default class Products {
         this.props = props;
         this.parent = props.parent;
         this.shoppingService = new ShoppingService();
+        this.addProductToCart = this.addProductToCart.bind(this);
         this.shoppingService.getProductsPageInfo().then(res => {
             this.products = res[0].data;
             this.filteredProducts = [...this.products];
@@ -19,7 +20,7 @@ export default class Products {
             addEvents({
                 '.category-list__item': {
                     name: 'click',
-                    handler: e => this.onCategorySelect(e)
+                    handler: e => this.onCategorySelect(e, true)
                 },
                 '#category-select': {
                     name: 'click',
@@ -35,6 +36,10 @@ export default class Products {
                 }
             }, this.parent);
         });
+    }
+
+    addProductToCart(product) {
+        this.shoppingService.addProductToCart(product);
     }
 
     hideCategoryDropdown() {
@@ -58,19 +63,29 @@ export default class Products {
 
     onCategoryDropdownSelect(e) {
         e.stopPropagation();
-        this.hideCategoryDropdown();
-        this.onCategorySelect(e);
+        this.onCategorySelect(e, false);
         this.categorySelect.innerText = e.target.innerHTML;
-    }
-
-    onCategorySelect(e) {
         this.categoryOptions.querySelectorAll('li').forEach(li => li.setAttribute('aria-selected', false));
         e.target.setAttribute('aria-selected', true);
-        const categoryId = e.target.getAttribute('category-id');
-        this.filteredProducts = this.products.filter(product => product.category === categoryId);
+        this.hideCategoryDropdown();
+    }
+
+    onCategorySelect(e, navClick) {
+        if(Array.from(e.target.classList).indexOf('selected') > -1) {
+            e.target.classList.remove('selected');
+            this.filteredProducts = this.products;
+
+        }
+        else {
+            const listItems = navClick ? this.categoryListItems : this.categoryDropdownItems; 
+            listItems.forEach(li => li.classList.remove('selected'));
+            e.target.classList.add('selected');
+            const categoryId = e.target.getAttribute('category-id');
+            this.filteredProducts = this.products.filter(product => product.category === categoryId);
+        }
         this.productCntr.innerHTML = '';
         this.filteredProducts.forEach(product => {
-            new Product({parent: this.productCntr, product});
+            new Product({parent: this.productCntr, product, addProductToCart: this.addProductToCart});
         });
     }
 
@@ -90,10 +105,10 @@ export default class Products {
                             ${this.categories.map(category => `<li category-id = ${category.id} class = "category-list__item bold-txt">${category.name}</li>`).join('')}
                         </ul>
                     </nav>
-                    <article class = 'flex5'>
+                    <section class = 'flex5'>
                         <section id = 'product-cntr' class = 'flex'></section>
                         <footer class = 'center-txt pl0 light-bg' ></footer>
-                    <article>
+                    <section>
                 </article>
             </article>
         `;
@@ -101,10 +116,12 @@ export default class Products {
         this.productCntr = this.parent.querySelector('#product-cntr');
         this.categorySelect = this.parent.querySelector('#category-select');
         this.categoryOptions = this.parent.querySelector('#category-list');
+        this.categoryDropdownItems = this.parent.querySelectorAll('#category-list>li');
+        this.categoryListItems = this.parent.querySelectorAll('.category-list__item');
         new ShoppingHeader({...this.props, parent: this.parent.querySelector('#header-cntr')});
         new ShoppingFooter({parent: this.parent.querySelector('footer')});
         this.filteredProducts.forEach(product => {
-            new Product({parent: this.productCntr, product});
+            new Product({parent: this.productCntr, product, addProductToCart: this.addProductToCart});
         });
     }
 }
