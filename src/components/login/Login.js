@@ -64,7 +64,7 @@ export default class Login {
         new ShoppingFooter({parent: this.parent.querySelector('footer')});
         this.inputs = [];
         this.inputs.push(new Input({type: 'email', parent: this.parent.querySelector('.email-cntr')}));
-        this.inputs.push(new Input({type: 'password', parent: this.parent.querySelector('.password-cntr'), minlength: 6, maxlength: 14}));
+        this.inputs.push(new Input({type: 'password', parent: this.parent.querySelector('.password-cntr'), minlength: 6, alphanumeric: true, noSpaces: true}));
         new Input({type: 'submit', parent: this.parent.querySelector('.submit-cntr'), value: 'Login'});
     }
 }

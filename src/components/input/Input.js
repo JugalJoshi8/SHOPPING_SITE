@@ -40,6 +40,12 @@ export default class Input {
         if (this.maxlength && this.input.value.length > this.maxlength) {
             return false;
         }
+        if (this.props.alphanumeric && !(/^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/).test(this.input.value)) {
+            return false;
+        }
+        if (this.props.noSpaces && !(/^\S*$/).test(this.input.value)) {
+            return false;
+        }
         if(this.input.value.trim().length < 1) {
             return false;
         }
@@ -91,7 +97,7 @@ export default class Input {
                 markup = `
                     <label id = label-${this.type} class = 'label--hidden label' for="${this.type}" >Password</label>
                     <input  id = ${this.type} name = 'password' class = 'p1 input mb1 bold-txt' placeholder = 'Password' type="password">
-                    <div class = 'invalid-${this.type} hide mb1'>Password must be between 6-14 characters</div>
+                    <div class = 'invalid-${this.type} hide mb1'>Password should have minimum 6 characters with 1 number and 1 alphabet and not contain spaces</div>
                 `;
                 break;
             case 'confirm-password':

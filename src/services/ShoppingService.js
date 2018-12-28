@@ -12,7 +12,6 @@ class ShoppingService {
     }
 
     getCategories() {
-        debugger;
         return this.categories || ajaxService.get('categories').then(res => {
             this.categories = res;
             return res;

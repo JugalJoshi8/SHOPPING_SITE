@@ -70,9 +70,9 @@ export default class SignUp {
         this.inputs.push(new Input({ type: 'first-name', parent: this.parent.querySelector('.first-name-cntr') }));
         this.inputs.push(new Input({ type: 'last-name', parent: this.parent.querySelector('.last-name-cntr') }));
         this.inputs.push(new Input({ type: 'email', parent: this.parent.querySelector('.email-cntr') }));
-        const passwordInput = new Input({ type: 'password', parent: this.parent.querySelector('.password-cntr'), minlength: 6, maxlength: 14 })
+        const passwordInput = new Input({ type: 'password', parent: this.parent.querySelector('.password-cntr'), minlength: 6, alphanumeric: true, noSpaces: true })
         this.inputs.push(passwordInput);
-        this.inputs.push(new Input({ type: 'confirm-password', parent: this.parent.querySelector('.confirm-password-cntr'), minlength: 6, maxlength: 14, passwordInput }));
+        this.inputs.push(new Input({ type: 'confirm-password', parent: this.parent.querySelector('.confirm-password-cntr'), minlength: 6, alphanumeric: true, noSpaces: true, passwordInput }));
         new Input({ type: 'submit', parent: this.parent.querySelector('.submit-cntr'), value: 'Signup' });
     }
 }
