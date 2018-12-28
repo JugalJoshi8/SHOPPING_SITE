@@ -1,18 +1,33 @@
+import { addEvents } from './services/Utils';
+
 export default class Router {
-    constructor(routes, props){
+    constructor(routes, props) {
         this.routes = routes;
         this.props = props;
         this.parent = props.parent;
-        this.showComponent();
-        window.onpopstate = () => this.showComponent();
-    } 
+        this.showRouteComponent();
+        window.onpopstate = () => this.showRouteComponent();
+        addEvents({
+            '#child-cntr': {
+                name: 'click',
+                handler: e => {
+                    if (e && e.target && e.target.getAttribute('route')) {
+                        this.showRouteComponent(e.target.getAttribute('route'))
+                    }
+                }
+            }
+        }, document.querySelector('#app'))
+    }
 
-    showComponent() {
-        const currentPath = window.location.pathname;
+    showRouteComponent(path) {
+        const currentPath = path || window.location.pathname;
         const route = this.routes.find(route => route.path === currentPath);
-        if(route) {
+        if (route) {
             this.props.parent.innerHTML = '';
-            new route.component({...this.props});
-        }   
+            new route.component({ ...this.props });
+        }
+        if(path) {
+            window.history.pushState({}, null, path);
+        }
     }
 }

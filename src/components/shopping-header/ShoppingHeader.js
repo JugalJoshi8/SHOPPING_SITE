@@ -35,14 +35,14 @@ export default class ShoppingHeader {
                 <div class=logo></div>
                 <nav>
                     <ul>
-                        <li id = 'home'>Home</li>
-                        <li id = 'products'>Products</li>
+                        <li id = 'home' route = '/homepage'>Home</li>
+                        <li id = 'products' route = '/products'>Products</li>
                     </ul>
                 </nav>
                 <div class = cartBtnCntnr>
                     <div class = btnCntnr>
-                        <button id = 'sign-in' class = cart__button>Signin</button>
-                        <button id = 'register' class = cart__button>Register</button>
+                        <button id = 'sign-in' route = '/login' class = cart__button>Signin</button>
+                        <button id = 'register' route = '/signup' class = cart__button>Register</button>
                     </div>
                     <div class = cart>
                         <div class = cartImage></div>

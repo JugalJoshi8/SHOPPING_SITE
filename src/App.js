@@ -11,33 +11,9 @@ class App {
     this.render();
   }
 
-  onLoginSuccess() {
-    this.onHomeClick();
-  }
-
-  onRegister() {
-    window.history.pushState({}, null, 'signup');
-    this.router.showComponent();
-  }
-
-  onSignIn() {
-    window.history.pushState({}, null, 'login');
-    this.router.showComponent();
-  }
-
-  onProductsClick() {
-    window.history.pushState({}, null, 'products');
-    this.router.showComponent();
-  }
-
-  onHomeClick() {
-    window.history.pushState({}, null, 'homepage');
-    this.router.showComponent();
-  }
-
   render() {
     const markup = `
-        <div class="app p1">
+        <div id = 'app' class="app p1">
           <div id="child-cntr">
           </div>
         </div>
@@ -45,16 +21,8 @@ class App {
     this.parent.innerHTML = markup;
     this.childContainer = document.querySelector('#child-cntr');
     this.childProps = {
-      parent: this.childContainer,
-      onLoginSuccess: _ => this.onLoginSuccess(),
-      onRegister: _ => this.onRegister(),
-      onSignIn: _ => this.onSignIn(),
-      onProductsClick: _ => this.onProductsClick(),
-      onHomeClick: _ => this.onHomeClick()
+      parent: this.childContainer
     }
-    //new Login({parent: this.childContainer, onLoginSuccess: _ => this.onLoginSuccess(), onRegister: _ => this.onRegister()});
-    //this.onLoginSuccess();
-    //this.onProductsClick();
     const routes = [
       {
         path: '/',
