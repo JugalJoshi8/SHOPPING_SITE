@@ -24,6 +24,11 @@ export default class ShoppingHeader {
             }
         }, this.parent);
     }
+
+    updateCart(length) {
+        this.cartProducts.innerHTML = length;
+    }
+
     render() {
        const markup = `
             <header>
@@ -41,11 +46,12 @@ export default class ShoppingHeader {
                     </div>
                     <div class = cart>
                         <div class = cartImage></div>
-                        <div>0 items</div>
+                        <div><span id = 'cartProducts'>${this.props.cartProducts || 0}</span> items</div>
                     </div>
                 </div>
             </header>
        `;
        this.parent.innerHTML = markup;
+       this.cartProducts = this.parent.querySelector('#cartProducts');
     }
 }

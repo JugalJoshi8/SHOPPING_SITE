@@ -1,16 +1,20 @@
 import ajaxService from './AJAXService';
-export default class ShoppingService {
+class ShoppingService {
     constructor(url) {
         this.cartProducts = [];
     }
 
     getBanners() {
-        return ajaxService.get('banners');
+        return this.banners || ajaxService.get('banners').then(res => {
+            this.banners = res;
+            return res;
+        });
     }
 
     getCategories() {
+        debugger;
         return this.categories || ajaxService.get('categories').then(res => {
-            this.categories = res.data;
+            this.categories = res;
             return res;
         });
     }
@@ -20,7 +24,10 @@ export default class ShoppingService {
     }
 
     getProducts() {
-        return ajaxService.get('products');
+        return this.products || ajaxService.get('products').then(res => {
+            this.products = res;
+            return res;
+        });;
     }
 
     getProductsPageInfo() {
@@ -31,13 +38,16 @@ export default class ShoppingService {
         return this.cartProducts;
     }
 
-    addProductToCart(item) {
-        ajaxService.post('/addToCart', item)
-          .then(function (response) {
-            console.log(response);
+    addProductToCart(product) {
+        return ajaxService.post('/addToCart', product)
+          .then(_ => {
+              this.cartProducts.push(product);
+              return this.cartProducts;
           })
-          .catch(function (error) {
-            console.log(error);
-          });
+          .catch(_ => console.log('Error occurred when adding product to cart'));
     }
 }
+
+const shoppingService = new ShoppingService();
+
+export default shoppingService;

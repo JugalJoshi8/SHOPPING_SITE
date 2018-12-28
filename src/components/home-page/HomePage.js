@@ -1,4 +1,4 @@
-import ShoppingService from './../../services/ShoppingService';
+import shoppingService from './../../services/ShoppingService';
 import ShoppingHeader from './../shopping-header/ShoppingHeader';
 import ShoppingFooter from './../shopping-footer/ShoppingFooter';
 import Carousel from './../carousel/Carousel';
@@ -9,7 +9,7 @@ export default class HomePage {
     constructor(props) {
         this.props = props;
         this.parent = props.parent;
-        this.shoppingService = new ShoppingService();
+        this.shoppingService = shoppingService;
         this.shoppingService.getHomePageInfo().then(res => {
             this.banners = res[0].data;
             this.categories = res[1].data;
@@ -28,7 +28,7 @@ export default class HomePage {
         `;
         this.parent.innerHTML = markup;
         this.categoryCntr = this.parent.querySelector('#category-cntr');
-        new ShoppingHeader({...this.props, parent: this.parent.querySelector('#header-cntr')});
+        new ShoppingHeader({...this.props, cartProducts: this.shoppingService.cartProducts.length, parent: this.parent.querySelector('#header-cntr')});
         new ShoppingFooter({parent: this.parent.querySelector('footer')});
         new Carousel({parent: this.parent.querySelector('#carousel-cntr'), items: this.banners, itemComponent:  Banner});
         this.categories.forEach(category => {

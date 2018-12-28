@@ -1,4 +1,4 @@
-import ShoppingService from './../../services/ShoppingService';
+import shoppingService from './../../services/ShoppingService';
 import ShoppingHeader from './../shopping-header/ShoppingHeader';
 import ShoppingFooter from './../shopping-footer/ShoppingFooter';
 import Product from './../product/Product';
@@ -8,7 +8,7 @@ export default class Products {
     constructor(props) {
         this.props = props;
         this.parent = props.parent;
-        this.shoppingService = new ShoppingService();
+        this.shoppingService = shoppingService;
         this.addProductToCart = this.addProductToCart.bind(this);
         this.shoppingService.getProductsPageInfo().then(res => {
             this.products = res[0].data;
@@ -39,7 +39,7 @@ export default class Products {
     }
 
     addProductToCart(product) {
-        this.shoppingService.addProductToCart(product);
+        this.shoppingService.addProductToCart(product).then(cartProducts => this.shoppongHeader.updateCart(cartProducts.length));
     }
 
     hideCategoryDropdown() {
@@ -118,7 +118,7 @@ export default class Products {
         this.categoryOptions = this.parent.querySelector('#category-list');
         this.categoryDropdownItems = this.parent.querySelectorAll('#category-list>li');
         this.categoryListItems = this.parent.querySelectorAll('.category-list__item');
-        new ShoppingHeader({...this.props, parent: this.parent.querySelector('#header-cntr')});
+        this.shoppongHeader = new ShoppingHeader({...this.props, cartProducts: this.shoppingService.cartProducts.length, parent: this.parent.querySelector('#header-cntr')});
         new ShoppingFooter({parent: this.parent.querySelector('footer')});
         this.filteredProducts.forEach(product => {
             new Product({parent: this.productCntr, product, addProductToCart: this.addProductToCart});
