@@ -3,6 +3,20 @@ class ShoppingService {
     constructor(url) {
         this.cartItems = [];
         this.cartItemsLength = 0;
+        this.cartSubscribers = [];
+        this.totalPrice = 0;
+    }
+
+    addCartSubscriber(func) {
+        this.cartSubscribers.push(func);
+    }
+
+    notifyCartSubscribers(changedItem) {
+        this.cartSubscribers.forEach(func => func({cartItems: this.cartItems, cartItemsLength: this.cartItemsLength, changedItem, totalPrice: this.totalPrice}));
+    }
+
+    removeSubscribers() {
+        this.cartSubscribers = [];
     }
 
     getBanners() {
@@ -50,9 +64,25 @@ class ShoppingService {
 
               }
               this.cartItemsLength++;
+              this.totalPrice += item.price;
+              this.notifyCartSubscribers(existingItem);
               return this.cartItemsLength;
           })
           .catch(_ => console.log('Error occurred when adding Item to cart'));
+    }
+
+    increaseItemQuantity(item) {
+        item.quantity++;
+        this.cartItemsLength++;
+        this.totalPrice += item.price;
+        this.notifyCartSubscribers(item);
+    }
+
+    decreaseItemQuantity(item) {
+        item.quantity--;
+        this.cartItemsLength--;
+        this.totalPrice -= item.price;
+        this.notifyCartSubscribers(item);
     }
 }
 

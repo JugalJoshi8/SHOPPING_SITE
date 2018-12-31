@@ -1,4 +1,5 @@
 import { addEvents } from './services/Utils';
+import shoppingService from './services/ShoppingService';
 
 export default class Router {
     constructor(routes, props) {
@@ -24,6 +25,8 @@ export default class Router {
         const route = this.routes.find(route => route.path === currentPath);
         if (route) {
             this.props.parent.innerHTML = '';
+            // remove subscribers from previous route
+            shoppingService.removeSubscribers();
             new route.component({ ...this.props });
         }
         if(path) {

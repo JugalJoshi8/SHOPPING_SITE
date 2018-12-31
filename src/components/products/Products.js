@@ -41,8 +41,7 @@ export default class Products {
     }
 
     addProductToCart(product) {
-        console.log(product);
-        this.shoppingService.addItemToCart(product).then(cartItemsLength => this.shoppongHeader.updateCart(cartItemsLength));
+        this.shoppingService.addItemToCart(product);
     }
 
     hideCategoryDropdown() {
@@ -93,8 +92,7 @@ export default class Products {
     }
 
     onCartClick() {
-        this.CartDetails.render();
-        this.cartDetailsCntr.classList.remove('scale0');
+        this.cartDetails.show();
     }
 
     render() {
@@ -118,7 +116,7 @@ export default class Products {
                         <footer class = 'center-txt pl0 light-bg' ></footer>
                     <section>
                 </article>
-                <article id = 'cart-details-cntr' class = 'scale0'>
+                <article id = 'cart-details-cntr'>
                 </article>
             </article>
         `;
@@ -128,13 +126,13 @@ export default class Products {
         this.categoryOptions = this.parent.querySelector('#category-list');
         this.categoryDropdownItems = this.parent.querySelectorAll('#category-list>li');
         this.categoryListItems = this.parent.querySelectorAll('.category-list__item');
-        this.shoppongHeader = new ShoppingHeader({...this.props, cartItems: this.shoppingService.cartItemsLength, parent: this.parent.querySelector('#header-cntr'), onCartClick: this.onCartClick});
+        new ShoppingHeader({...this.props, parent: this.parent.querySelector('#header-cntr'), onCartClick: this.onCartClick});
         new ShoppingFooter({parent: this.parent.querySelector('footer')});
         this.filteredProducts.forEach((product, index) => {
             new Product({parent: this.productCntr, product, addProductToCart: this.addProductToCart, key: index});
         });
         this.cartDetailsCntr = this.parent.querySelector('#cart-details-cntr');
-        this.CartDetails = new CartDetails({parent: this.cartDetailsCntr});
+        this.cartDetails = new CartDetails({parent: this.cartDetailsCntr});
 
     }
 }

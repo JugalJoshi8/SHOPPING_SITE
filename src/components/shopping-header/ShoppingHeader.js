@@ -5,6 +5,8 @@ export default class ShoppingHeader {
     constructor(props) {
         this.parent = props.parent;
         this.props = props;
+        this.onCartUpdate = this.onCartUpdate.bind(this);
+        shoppingService.addCartSubscriber(this.onCartUpdate);
         this.render();
         addEvents({
             '#register': {
@@ -30,8 +32,9 @@ export default class ShoppingHeader {
         }, this.parent);
     }
 
-    updateCart(length) {
-        this.cartItems.innerHTML = length;
+    onCartUpdate({cartItemsLength}) {
+        this.cartItems.innerHTML = cartItemsLength;
+        this.itemsTxt.innerHTML = cartItemsLength == 1 ? ' item' : ' items'; 
     }
 
     render() {
@@ -52,7 +55,7 @@ export default class ShoppingHeader {
                     </div>
                     <div class = 'cart' id = 'cart'>
                         <div class = cartImage></div>
-                        <div><span id = 'cartItems'>${shoppingService.cartItemsLength || 0}</span> items</div>
+                        <div><span id = 'cartItems'>${shoppingService.cartItemsLength || 0}</span><span id = 'itemsTxt'> items</span></div>
                     </div>
                 </div>
             </header>
@@ -60,5 +63,6 @@ export default class ShoppingHeader {
        `;
         this.parent.innerHTML = markup;
         this.cartItems = this.parent.querySelector('#cartItems');
+        this.itemsTxt = this.parent.querySelector('#itemsTxt');
     }
 }

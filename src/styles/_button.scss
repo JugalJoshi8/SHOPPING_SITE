@@ -78,6 +78,9 @@
     border-radius: 50%;
     border: none;
     cursor: pointer;
+    &:disabled {
+        opacity: 0.5;
+    }
     &::after{
       content: '';
       width: 10px;
