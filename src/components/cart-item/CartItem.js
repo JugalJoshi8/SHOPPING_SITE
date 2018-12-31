@@ -32,10 +32,7 @@ export default class CartItem {
         this.quantity.innerHTML = item.quantity;
         this.total.innerHTML = 'Rs.' + (item.price * item.quantity);
         if (item.quantity === 0) {
-            this.decreaseBtn.disabled = true;
-        }
-        else {
-            this.decreaseBtn.disabled = false;
+            this.element.parentNode.removeChild(this.element);
         }
     }
 

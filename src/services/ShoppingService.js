@@ -82,6 +82,9 @@ class ShoppingService {
         item.quantity--;
         this.cartItemsLength--;
         this.totalPrice -= item.price;
+        if(item.quantity === 0) {
+            this.cartItems.splice(this.cartItems.findIndex(cartItem => item.id === cartItem.id));
+        }
         this.notifyCartSubscribers(item);
     }
 }

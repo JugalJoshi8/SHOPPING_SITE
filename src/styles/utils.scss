@@ -188,3 +188,13 @@
   transform: scale(0);
 }
 
+.right-arrow {
+  width: 10px;
+  height: 10px;
+  border-left: solid 2px white;
+  border-bottom: solid 2px white;
+  display: block;
+  transform: rotate(-135deg);
+}
+
+

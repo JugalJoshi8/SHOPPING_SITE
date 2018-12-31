@@ -9,7 +9,7 @@ export default class CartDetails {
         shoppingService.addCartSubscriber(this.onCartUpdate.bind(this));
         this.render();
         addEvents({
-            '.closeButton': {
+            '.closeButton, #checkout, #start-shopping': {
                 'name': 'click',
                 'handler': _ => this.overlay.classList.add('scale0')
             }
@@ -32,6 +32,15 @@ export default class CartDetails {
                 new CartItem({parent: this.cartItems, item, key: index});
             });
         }
+        if(cartItemsLength) {
+            this.cart.classList.remove('hide');
+            this.emptyCart.classList.add('hide');
+        }
+        else {
+            this.cart.classList.add('hide');
+            this.emptyCart.classList.remove('hide');
+        }
+        this.totalPrice.innerHTML = 'Rs.' + totalPrice;
     }
 
     render() {
@@ -39,21 +48,30 @@ export default class CartDetails {
         const totalPrice = shoppingService.totalPrice;
         const markup = `
             <div class = 'cart-overlay'>
-                <div class = 'cart-dtls'>
-                    <header class="cart-dtls__header light-txt black-bg pt1 pb1 pl1 pr1 flex flex--jsb">
+                <div class = 'cart-dtls flex flex--v'>
+                    <header class="cart-dtls__header pt1 pb1 pl1 pr1 flex flex--jsb">
                         <h2 class = 'cart-header light-txt lg-txt bold-txt'>My Cart ${items.length ? (items.length > 1 ? `<span class = 'md-txt normal-txt'>(${items.length} items)</span>` : '<span class = "md-txt normal-txt">(1 item)</span>') : ''}</h2>
                         <button aria-label = 'Close Cart Details' class = 'closeButton'>
                         </button>
                     </header>
-                    <ul class = 'cart-items pt1'>
-                    </ul>
-                    <div class = 'cart-dtls__cheap ml1 mr1 mb1 pt1 pb1 white-bg'>Tou won't find it cheaper anywhere</div>
-                    <div class = 'white-bg dark-txt p1 cart-dtls__checkout'>
-                        <div class = 'mb1'>Promo code can be applied on payment page</div>
-                        <button class = 'button button--primary flex flex--jsb'>
-                            <div class = 'pl1'>Proceed to Checkout</div>
-                            <div class = 'pr1 total-price'>Rs.${totalPrice}<span class = 'pl1'>></span></div>
-                        </button>
+                    <div id = 'cart' class = 'flex flex1 flex--v'>
+                        <ul class = 'cart-items pt1 flex1'>
+                        </ul>
+                        <div class = 'cart-dtls__cheap ml1 mr1 mb1 pt1 pb1 white-bg'>Tou won't find it cheaper anywhere</div>
+                        <div class = 'white-bg dark-txt p1 cart-dtls__checkout center-txt'>
+                            <div class = 'mb1'>Promo code can be applied on payment page</div>
+                            <button id = 'checkout' class = 'button button--primary flex flex--jsb'>
+                                <div class = 'pl1'>Proceed to Checkout</div>
+                                <div class = 'pr1 flex flex--ac'><span class = 'total-price'>Rs.${totalPrice}</span><span class = 'ml1 right-arrow'></span></div>
+                            </button>
+                        </div>
+                    </div>
+                    <div id = 'empty-cart' class = 'flex flex1 flex--v p1 white-bg'>
+                        <div class = 'flex1 flex flex--v flex--jc center-txt'>
+                            <h2 class = 'bold-txt lg-xt dark-txt'>No items in your cart</h2>
+                            <h3 class = 'md-txt light-dark-txt'>Your favourite items are just a click away</h3>
+                        </div>
+                        <button id = 'start-shopping' class = 'button button--primary'>Start Shopping</button>
                     </div>
                 </div>
             </div>
@@ -65,5 +83,16 @@ export default class CartDetails {
         });
         this.cartHeader = this.props.parent.querySelector('.cart-header');
         this.overlay = this.props.parent.querySelector('.cart-overlay');
+        this.totalPrice = this.props.parent.querySelector('.total-price');
+        this.cart = this.props.parent.querySelector('#cart');
+        this.emptyCart = this.props.parent.querySelector('#empty-cart');
+        if(items.length) {
+            this.cart.classList.remove('hide');
+            this.emptyCart.classList.add('hide');
+        }
+        else {
+            this.cart.classList.add('hide');
+            this.emptyCart.classList.remove('hide');
+        }
     }
 }

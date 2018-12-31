@@ -55,6 +55,10 @@
     border-radius: 50%;
     border: none;
     cursor: pointer;
+    &:hover, &:focus {
+        transform: translateY(-1px);
+        background-color: $primary-hover;
+    }
     &::before, &::after{
       content: '';
       width: 2px;
@@ -78,6 +82,10 @@
     border-radius: 50%;
     border: none;
     cursor: pointer;
+    &:hover, &:focus {
+        transform: translateY(-1px);
+        background-color: $primary-hover;
+    }
     &:disabled {
         opacity: 0.5;
     }
