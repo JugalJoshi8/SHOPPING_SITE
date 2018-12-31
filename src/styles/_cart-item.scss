@@ -1,0 +1,9 @@
+.cart-item {
+    height: 200px;
+    img {
+        height: 100%;
+    }
+    &__total {
+        margin-left: auto;
+    }
+}

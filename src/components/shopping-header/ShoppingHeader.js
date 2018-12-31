@@ -1,4 +1,5 @@
-import {addEvents} from './../../services/Utils';
+import { addEvents } from './../../services/Utils';
+import shoppingService from './../../services/ShoppingService';
 export default class ShoppingHeader {
 
     constructor(props) {
@@ -12,7 +13,7 @@ export default class ShoppingHeader {
             },
             '#sign-in': {
                 name: 'click',
-                handler: _ => this.props.onSignIn && this.props.onSignIn() 
+                handler: _ => this.props.onSignIn && this.props.onSignIn()
             },
             '#home': {
                 name: 'click',
@@ -20,18 +21,23 @@ export default class ShoppingHeader {
             },
             '#products': {
                 name: 'click',
-                handler: _ => this.props.onProductsClick && this.props.onProductsClick() 
+                handler: _ => this.props.onProductsClick && this.props.onProductsClick()
+            },
+            '#cart': {
+                name: 'click',
+                handler: _ => this.props.onCartClick()
             }
         }, this.parent);
     }
 
     updateCart(length) {
-        this.cartProducts.innerHTML = length;
+        this.cartItems.innerHTML = length;
     }
 
     render() {
-       const markup = `
-            <header>
+        const markup = `
+       <div class = 'shopping-header'>     
+       <header>
                 <div class=logo></div>
                 <nav>
                     <ul>
@@ -44,14 +50,15 @@ export default class ShoppingHeader {
                         <button id = 'sign-in' route = '/login' class = cart__button>Signin</button>
                         <button id = 'register' route = '/signup' class = cart__button>Register</button>
                     </div>
-                    <div class = cart>
+                    <div class = 'cart' id = 'cart'>
                         <div class = cartImage></div>
-                        <div><span id = 'cartProducts'>${this.props.cartProducts || 0}</span> items</div>
+                        <div><span id = 'cartItems'>${shoppingService.cartItemsLength || 0}</span> items</div>
                     </div>
                 </div>
             </header>
+            </div>
        `;
-       this.parent.innerHTML = markup;
-       this.cartProducts = this.parent.querySelector('#cartProducts');
+        this.parent.innerHTML = markup;
+        this.cartItems = this.parent.querySelector('#cartItems');
     }
 }

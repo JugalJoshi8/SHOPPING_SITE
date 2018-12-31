@@ -5,17 +5,19 @@ export default class Product {
         this.props = props;
         this.render();
         addEvents({
-            'button': {
+           'button': {
                 name: 'click',
-                handler: _ => this.props.addProductToCart(this.props.product)
+                handler: _ => {
+                    this.props.addProductToCart(this.props.product)
+                }
             }
-        }, this.props.parent);
+        }, this.element);
     }
 
     render() {
         const product = this.props.product;
         const markup = `
-            <div class = 'product flex flex--v p1 mb2'>
+            <div class = 'product flex flex--v p1 mb2' id = 'pd-${this.props.key}'>
                 <h2 class = 'product__name dark-txt lg-txt'>${product.name}</h2>
                 <div class = 'product__desc'>
                     <img class = 'product__img' src = 'dist${product.imageURL}' alt = '${product.name}'>
@@ -33,6 +35,7 @@ export default class Product {
                 </div>
             </div>
         `;
-        this.props.parent.innerHTML += markup;
+        this.props.parent.insertAdjacentHTML( 'beforeend', markup );
+        this.element = this.props.parent.querySelector(`#pd-${this.props.key}`);
     }
 }

@@ -9,8 +9,9 @@ export const addEvents = (elements, parent) => {
         event = elements[element];
         // if only 1 event is there for 1 selector
         if(event.name) {
-            Array.from(parent.querySelectorAll(element)).forEach(ele => ele.addEventListener(event.name, event.handler));
-
+            Array.from(parent.querySelectorAll(element)).forEach(ele => {
+                ele.addEventListener(event.name, event.handler);
+            });
         }
         // if multiple events are there for 1 selector
         else {

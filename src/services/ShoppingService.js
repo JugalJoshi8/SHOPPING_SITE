@@ -1,7 +1,8 @@
 import ajaxService from './AJAXService';
 class ShoppingService {
     constructor(url) {
-        this.cartProducts = [];
+        this.cartItems = [];
+        this.cartItemsLength = 0;
     }
 
     getBanners() {
@@ -33,17 +34,25 @@ class ShoppingService {
         return Promise.all([this.getProducts(), this.getCategories()]);
     }
 
-    getCartIProducts() {
-        return this.cartProducts;
+    getCartItems() {
+        return this.cartItems;
     }
 
-    addProductToCart(product) {
-        return ajaxService.post('/addToCart', product)
+    addItemToCart(item) {
+        return ajaxService.post('/addToCart', item)
           .then(_ => {
-              this.cartProducts.push(product);
-              return this.cartProducts;
+              const existingItem = this.cartItems.find(cartItem => cartItem.id === item.id);
+              if(existingItem) {
+                existingItem.quantity++;
+              }
+              else {
+                this.cartItems.push({...item, quantity: 1});
+
+              }
+              this.cartItemsLength++;
+              return this.cartItemsLength;
           })
-          .catch(_ => console.log('Error occurred when adding product to cart'));
+          .catch(_ => console.log('Error occurred when adding Item to cart'));
     }
 }
 

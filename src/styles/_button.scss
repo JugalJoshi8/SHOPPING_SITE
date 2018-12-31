@@ -21,3 +21,71 @@
         }
     }
 }
+
+.closeButton {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    &::before, &::after{
+      content: '';
+      width: 2px;
+      height: 20px;
+      left: 9px;
+      top: 0;
+      position: absolute;
+      background-color: white;
+      display: block;
+    }
+    &::before {
+        transform: rotate(45deg);
+    }
+    &::after {
+        transform: rotate(-45deg);
+    }
+  }
+
+  .increaseButton {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background-color: $primary;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    &::before, &::after{
+      content: '';
+      width: 2px;
+      height: 10px;
+      left: 9px;
+      top: 5px;
+      position: absolute;
+      background-color: white;
+      display: block;
+    }
+    &::before {
+        transform: rotate(90deg);
+    }
+  }
+
+  .decreaseButton {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background-color: $primary;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    &::after{
+      content: '';
+      width: 10px;
+      height: 2px;
+      left: 5px;
+      top: 9px;
+      position: absolute;
+      background-color: white;
+      display: block;
+    }
+  }

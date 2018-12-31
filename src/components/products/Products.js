@@ -3,6 +3,7 @@ import ShoppingHeader from './../shopping-header/ShoppingHeader';
 import ShoppingFooter from './../shopping-footer/ShoppingFooter';
 import Product from './../product/Product';
 import {addEvents} from './../../services/Utils';
+import CartDetails from './../cart-details/CartDetails';
 
 export default class Products {
     constructor(props) {
@@ -10,6 +11,7 @@ export default class Products {
         this.parent = props.parent;
         this.shoppingService = shoppingService;
         this.addProductToCart = this.addProductToCart.bind(this);
+        this.onCartClick = this.onCartClick.bind(this);
         this.shoppingService.getProductsPageInfo().then(res => {
             this.products = res[0].data;
             this.filteredProducts = [...this.products];
@@ -39,7 +41,8 @@ export default class Products {
     }
 
     addProductToCart(product) {
-        this.shoppingService.addProductToCart(product).then(cartProducts => this.shoppongHeader.updateCart(cartProducts.length));
+        console.log(product);
+        this.shoppingService.addItemToCart(product).then(cartItemsLength => this.shoppongHeader.updateCart(cartItemsLength));
     }
 
     hideCategoryDropdown() {
@@ -89,6 +92,11 @@ export default class Products {
         });
     }
 
+    onCartClick() {
+        this.CartDetails.render();
+        this.cartDetailsCntr.classList.remove('scale0');
+    }
+
     render() {
         const markup = `
             <article id = 'home-page' class = 'products'>
@@ -110,6 +118,8 @@ export default class Products {
                         <footer class = 'center-txt pl0 light-bg' ></footer>
                     <section>
                 </article>
+                <article id = 'cart-details-cntr' class = 'scale0'>
+                </article>
             </article>
         `;
         this.parent.innerHTML = markup;
@@ -118,10 +128,13 @@ export default class Products {
         this.categoryOptions = this.parent.querySelector('#category-list');
         this.categoryDropdownItems = this.parent.querySelectorAll('#category-list>li');
         this.categoryListItems = this.parent.querySelectorAll('.category-list__item');
-        this.shoppongHeader = new ShoppingHeader({...this.props, cartProducts: this.shoppingService.cartProducts.length, parent: this.parent.querySelector('#header-cntr')});
+        this.shoppongHeader = new ShoppingHeader({...this.props, cartItems: this.shoppingService.cartItemsLength, parent: this.parent.querySelector('#header-cntr'), onCartClick: this.onCartClick});
         new ShoppingFooter({parent: this.parent.querySelector('footer')});
-        this.filteredProducts.forEach(product => {
-            new Product({parent: this.productCntr, product, addProductToCart: this.addProductToCart});
+        this.filteredProducts.forEach((product, index) => {
+            new Product({parent: this.productCntr, product, addProductToCart: this.addProductToCart, key: index});
         });
+        this.cartDetailsCntr = this.parent.querySelector('#cart-details-cntr');
+        this.CartDetails = new CartDetails({parent: this.cartDetailsCntr});
+
     }
 }

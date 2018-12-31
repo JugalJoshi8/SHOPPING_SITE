@@ -28,7 +28,7 @@ export default class HomePage {
         `;
         this.parent.innerHTML = markup;
         this.categoryCntr = this.parent.querySelector('#category-cntr');
-        new ShoppingHeader({...this.props, cartProducts: this.shoppingService.cartProducts.length, parent: this.parent.querySelector('#header-cntr')});
+        new ShoppingHeader({...this.props, cartItems: this.shoppingService.cartItemsLength, parent: this.parent.querySelector('#header-cntr')});
         new ShoppingFooter({parent: this.parent.querySelector('footer')});
         new Carousel({parent: this.parent.querySelector('#carousel-cntr'), items: this.banners, itemComponent:  Banner});
         this.categories.forEach(category => {
