@@ -68,6 +68,12 @@ export default class Products {
         else if(keyCode === 13) {
             this.onCategoryDropdownSelect({target: currentSelected});
         }
+        // escape key
+        else if(keyCode === 27) {
+            this.hideCategoryDropdown();
+            this.categoryOptions.setAttribute('tabindex', '-1');
+            this.categorySelect.focus();
+        }
         
     }
 
