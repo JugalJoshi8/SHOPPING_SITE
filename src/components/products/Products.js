@@ -80,7 +80,7 @@ export default class Products {
         }
         else {
             const listItems = navClick ? this.categoryListItems : this.categoryDropdownItems; 
-            listItems.forEach(li => li.classList.remove('selected'));
+            Array.from(listItems).forEach(li => li.classList.remove('selected'));
             e.target.classList.add('selected');
             const categoryId = e.target.getAttribute('category-id');
             this.filteredProducts = this.products.filter(product => product.category === categoryId);

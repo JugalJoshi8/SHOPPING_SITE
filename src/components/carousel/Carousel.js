@@ -97,7 +97,7 @@ export default class Carousel {
             this.nextButton.disabled = false;
         }
         Array.from(this.slidePoints.querySelectorAll('div')).forEach(element => element.classList.remove('currentPoint'));
-        this.slidePoints.querySelector(`:nth-child(${this.currentSlide + 1})`).classList.add('currentPoint')
+        this.slidePoints.querySelector(':nth-child(' + (this.currentSlide + 1) + ')').classList.add('currentPoint')
     }
 
     startAnimation(e) {

@@ -14,7 +14,7 @@ export default class CartDetails {
                 'handler': _ => this.overlay.classList.add('scale0')
             }
         }, this.props.parent);
-        this.overlay.classList.add('scale0');
+        //this.overlay.classList.add('scale0');
         
     }
 
@@ -45,7 +45,7 @@ export default class CartDetails {
         const items = shoppingService.cartItems;
         const totalPrice = shoppingService.totalPrice;
         const markup = `
-            <div class = 'cart-overlay'>
+            <div class = 'cart-overlay scale0'>
                 <div class = 'cart-dtls flex flex--v'>
                     <header class="cart-dtls__header pt1 pb1 pl1 pr1 flex flex--jsb">
                         <h1 class = 'cart-header lg-txt bold-txt'>My Cart ${items.length ? (items.length > 1 ? `<span class = 'md-txt normal-txt'>(${items.length} items)</span>` : '<span class = "md-txt normal-txt">(1 item)</span>') : ''}</h2>
