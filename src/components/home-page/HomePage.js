@@ -4,17 +4,23 @@ import ShoppingFooter from './../shopping-footer/ShoppingFooter';
 import Carousel from './../carousel/Carousel';
 import Banner from './../banner/Banner';
 import Category from './../category/Category';
+import CartDetails from './../cart-details/CartDetails';
 
 export default class HomePage {
     constructor(props) {
         this.props = props;
         this.parent = props.parent;
         this.shoppingService = shoppingService;
+        this.onCartClick = this.onCartClick.bind(this);
         this.shoppingService.getHomePageInfo().then(res => {
             this.banners = res[0].data;
             this.categories = res[1].data;
             this.render();
         });
+    }
+
+    onCartClick() {
+        this.cartDetails.show();
     }
 
     render() {
@@ -26,11 +32,13 @@ export default class HomePage {
                     <section id = 'category-cntr'></section>
                     <footer class = 'center-txt pl1 light-bg' ></footer>
                 </div>
+                <article id = 'cart-details-cntr'>
+                </article>
             </article>
         `;
         this.parent.innerHTML = markup;
         this.categoryCntr = this.parent.querySelector('#category-cntr');
-        new ShoppingHeader({...this.props, parent: this.parent.querySelector('#header-cntr')});
+        new ShoppingHeader({...this.props, parent: this.parent.querySelector('#header-cntr'), onCartClick: this.onCartClick});
         new ShoppingFooter({parent: this.parent.querySelector('footer')});
         new Carousel({parent: this.parent.querySelector('#carousel-cntr'), items: this.banners, itemComponent:  Banner});
         this.categories.forEach(category => {
@@ -38,5 +46,7 @@ export default class HomePage {
                 new Category({parent: this.categoryCntr, category});
             }
         });
+        this.cartDetailsCntr = this.parent.querySelector('#cart-details-cntr');
+        this.cartDetails = new CartDetails({parent: this.cartDetailsCntr});
     }
 }
