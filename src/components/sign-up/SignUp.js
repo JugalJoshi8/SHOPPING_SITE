@@ -38,8 +38,8 @@ export default class SignUp {
                <div id = header-cntr></div>
                <div class="signup__content flex p2 flex--jc flex--v">
                 <div class = 'mr3'>
-                    <div class = 'lg-txt bold-txt mb1'>Signup</div>
-                    <div>We do not share your personal details with anyone.</div>
+                    <h1 class = 'xl-txt bold-txt mb1 dark-txt'>Signup</h1>
+                    <h2 class = 'md-txt bold-txt dark-txt'>We do not share your personal details with anyone.</h2>
                 </div>
                 <form class = 'signup-form'>
                     <div class = 'first-name-cntr'>

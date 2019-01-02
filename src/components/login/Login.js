@@ -41,8 +41,8 @@ export default class Login {
                <div id = header-cntr></div>
                <div class="login__content flex p2 flex--jc flex--v">
                 <div class = 'mr3'>
-                    <h1 class = 'lg-txt bold-txt mb1'>Login</h1>
-                    <h2>Get access to your Orders, Wishlist and Recommendations</h2>
+                    <h1 class = 'xl-txt bold-txt mb1 dark-txt'>Login</h1>
+                    <h2 class = 'md-txt bold-txt dark-txt'>Get access to your Orders, Wishlist and Recommendations</h2>
                 </div>
                 <form class = 'login-form'>
                     <div class = 'email-cntr'>

@@ -4,6 +4,7 @@
     border: none;
     border-bottom: solid 1px $light;
     height: 40px;
+    display: block;
     @include md {
         width: 300px;
     }
@@ -25,14 +26,12 @@
 
 .label {
     color: $input-focus-color;
-    display: block;
+    display: inline-block;
+    transition: all 0.1s ease-in;
     &--hidden {
-        position: absolute;
-        left: -10000px;
-        top: auto;
-        width: 1px;
-        height: 1px;
-        overflow: hidden;
+       transform: scale(0);
+       transform-origin: 0% 0%;
+       overflow: hidden;
     }
 }
 
