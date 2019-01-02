@@ -1,7 +1,7 @@
 
 @import './variables';
 @import './mixins';
-@import './utils.scss';
+@import './utils';
 @import './text';
 @import './reset';
 @import './input';
@@ -13,8 +13,8 @@
 @import './home-page';
 @import './carousel';
 @import './banner';
-@import './category.scss';
-@import './products.scss';
-@import './product.scss';
+@import './_category';
+@import './products';
+@import './product';
 @import './cart-details';
 @import './cart-item';

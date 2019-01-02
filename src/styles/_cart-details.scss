@@ -1,10 +1,9 @@
 .cart-overlay {
-    position: fixed;
+    position: absolute;
     left: 0;
     right: 0;
     top: 90px;
     bottom: 0;
-    margin: 1rem;
     @include md {
         top: 120px;
     }
@@ -27,7 +26,7 @@
     @include lg {
         opacity: 1;
         width: 40%;
-        height: 80%;
+        height: 90%;
         position: absolute;
         left: 50%;
         top: 50%;
@@ -36,9 +35,11 @@
     &__header {
         background-color: #fff;
         color: $dark;
+        margin-top: 2rem;
         @include lg {
             background-color: #000;
             color: $light;
+            margin-top: 0;
         }
     }
     &__cheap {
@@ -59,9 +60,6 @@
     }
 }
 
-.cart-items {
-    overflow-y: auto;
-}
 
 
 

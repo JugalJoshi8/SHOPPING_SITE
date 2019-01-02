@@ -1,11 +1,12 @@
 .category {
-    height: 200px;
     position: relative;
+    padding: 1rem 0.5rem;
     @include md {
         height: 250px;
+        padding: 2rem;
     }
     &__img {
-        width: 30%;
+        width: 35%;
         display: block;
         @include md {
             width: 30%;
@@ -13,7 +14,9 @@
         }
     }
     &__details {
-        max-width: 40%;
+        @include md {
+            max-width: 40%;
+        }
     }
     &:nth-child(2n) {
         flex-direction: row-reverse;

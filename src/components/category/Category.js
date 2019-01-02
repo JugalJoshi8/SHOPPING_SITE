@@ -7,11 +7,11 @@ export default class Category {
 
     render() {
         const markup = `
-            <section class = 'category flex flex--ac p2 flex--jsa half-shadow'>
+            <section class = 'category flex flex--ac flex--jsa half-shadow'>
                 <img class = 'category__img' src = dist${this.category.imageUrl} alt = '${this.category.name}'>
                 <div class = 'category__details flex flex--v flex--ac'>
-                    <h2 class = 'mb1'>${this.category.name}</h2>
-                    <h3 class = 'mb2 normal-txt'>${this.category.description}</h2>
+                    <h1 class = 'mb1 lg-txt bold-txt'>${this.category.name}</h2>
+                    <h2 class = 'mb2 center-txt normal-txt md-txt'>${this.category.description}</h2>
                     <button class = 'button button--primary bold-txt lg-txt'>Explore ${this.category.key}</button>
                 </div>
             </section>

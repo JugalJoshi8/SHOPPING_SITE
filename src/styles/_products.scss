@@ -1,4 +1,6 @@
 .products {
+    height: 100%;
+    position: relative;
     &__nav {
         display: none;
         @include md {

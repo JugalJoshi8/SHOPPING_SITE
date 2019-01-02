@@ -23,15 +23,13 @@ export default class CartDetails {
     }
 
     onCartUpdate({cartItems, cartItemsLength, changedItem, totalPrice}) {
-        if(changedItem) {
-            this.cartHeader.innerHTML = `My Cart ${cartItemsLength ? (cartItemsLength > 1 ? `<span class = 'md-txt normal-txt'>(${cartItemsLength} items)</span>` : '<span class = "md-txt normal-txt">(1 item)</span>') : ''}`;
-        }
-        else {
+        if(!changedItem) {
             this.cartItems.innerHTML = '';
             cartItems.forEach((item, index) => {
                 new CartItem({parent: this.cartItems, item, key: index});
             });
         }
+        this.cartHeader.innerHTML = `My Cart ${cartItemsLength ? (cartItemsLength > 1 ? `<span class = 'md-txt normal-txt'>(${cartItemsLength} items)</span>` : '<span class = "md-txt normal-txt">(1 item)</span>') : ''}`;
         if(cartItemsLength) {
             this.cart.classList.remove('hide');
             this.emptyCart.classList.add('hide');
@@ -50,14 +48,16 @@ export default class CartDetails {
             <div class = 'cart-overlay'>
                 <div class = 'cart-dtls flex flex--v'>
                     <header class="cart-dtls__header pt1 pb1 pl1 pr1 flex flex--jsb">
-                        <h2 class = 'cart-header light-txt lg-txt bold-txt'>My Cart ${items.length ? (items.length > 1 ? `<span class = 'md-txt normal-txt'>(${items.length} items)</span>` : '<span class = "md-txt normal-txt">(1 item)</span>') : ''}</h2>
+                        <h1 class = 'cart-header lg-txt bold-txt'>My Cart ${items.length ? (items.length > 1 ? `<span class = 'md-txt normal-txt'>(${items.length} items)</span>` : '<span class = "md-txt normal-txt">(1 item)</span>') : ''}</h2>
                         <button aria-label = 'Close Cart Details' class = 'closeButton'>
                         </button>
                     </header>
                     <div id = 'cart' class = 'flex flex1 flex--v'>
-                        <ul class = 'cart-items pt1 flex1'>
-                        </ul>
-                        <div class = 'cart-dtls__cheap ml1 mr1 mb1 pt1 pb1 white-bg'>Tou won't find it cheaper anywhere</div>
+                        <div class = 'flex1 o-auto'>
+                            <ul class = 'cart-items pt1 flex1'>
+                            </ul>
+                            <div class = 'cart-dtls__cheap ml1 mr1 mb1 pt1 pb1 white-bg'>Tou won't find it cheaper anywhere</div>
+                        </div>
                         <div class = 'white-bg dark-txt p1 cart-dtls__checkout center-txt'>
                             <div class = 'mb1'>Promo code can be applied on payment page</div>
                             <button id = 'checkout' class = 'button button--primary flex flex--jsb'>

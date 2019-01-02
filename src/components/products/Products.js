@@ -97,7 +97,7 @@ export default class Products {
 
     render() {
         const markup = `
-            <article id = 'home-page' class = 'products'>
+            <article class = 'products flex flex--v'>
                 <section id = 'header-cntr'></section>
                 <div aria-haspopup="listbox" id = 'category-select' tabindex="0" aria-autocomplete="none" class = 'button button--primary category__select' role="combobox" aria-owns="category-list" aria-expanded="false" aria-labelledby="category-select">Select a Category</div>
                 <div class = 'category-options'>
@@ -105,7 +105,7 @@ export default class Products {
                         ${this.categories.map(category => `<li role="option" category-id = ${category.id} class = "light-bg p1 lg-txt category-list__option bold-txt">${category.name}</li>`).join('')}
                     </ul>
                 </div>
-                <article class = 'flex flex--ast'>
+                <article class = 'flex flex--ast flex1 o-auto'>
                     <nav class = 'flex1 products__nav'>
                         <ul class = 'category-list' role="listbox">
                             ${this.categories.map(category => `<li category-id = ${category.id} class = "category-list__item bold-txt">${category.name}</li>`).join('')}

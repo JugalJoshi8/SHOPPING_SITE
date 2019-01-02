@@ -39,7 +39,7 @@ export default class CartItem {
     render() {
         const item = this.props.item;
         const markup = `
-            <li class = 'flex cart-item white-bg p2 mb1 flex--ac' id = 'cart-item${this.props.key}'>
+            <li class = 'flex cart-item white-bg mb1 flex--ac' id = 'cart-item${this.props.key}'>
                 <img class = 'mr1' src = 'dist${item.imageURL}' alt = '${item.name}'>
                 <div class = 'flex flex--v flex1'>
                     <h3 class = 'mb1'>${item.name}</h3> 

@@ -1,7 +1,12 @@
 #home-page {
+    height: 100%;
+    position: relative;
     @include lg {
         footer {
             text-align: start;
         }
     }
+}
+#child-cntr {
+    height: 100%;
 }

@@ -19,11 +19,13 @@ export default class HomePage {
 
     render() {
         const markup = `
-            <article id = 'home-page'>
+            <article id = 'home-page' class = 'flex flex--v'>
                 <section id = 'header-cntr'></section>
-                <section id = 'carousel-cntr'></section>
-                <section id = 'category-cntr'></section>
-                <footer class = 'center-txt pl1 light-bg' ></footer>
+                <div class = 'o-auto flex1'>
+                    <section id = 'carousel-cntr'></section>
+                    <section id = 'category-cntr'></section>
+                    <footer class = 'center-txt pl1 light-bg' ></footer>
+                </div>
             </article>
         `;
         this.parent.innerHTML = markup;

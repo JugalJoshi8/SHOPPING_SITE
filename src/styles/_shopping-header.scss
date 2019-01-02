@@ -8,13 +8,19 @@
     width: 100%;
     align-items: flex-end;
     border: solid 1px $light;
-    padding: 1rem 5rem;
     box-shadow: 0 2px 4px $light-grey;
+    padding: 0.5rem;
+    include md {
+      padding: 1rem 5rem;
+    }
   }
 
   header nav,
   header ul {
-    display: flex;
+    display: none;
+    @include md {
+      display: flex;
+    }
   }
 
   header nav {
@@ -47,8 +53,17 @@
     margin-left: auto;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-self: stretch;
+    @include md {
+      justify-content: space-between;
+    }
+    .btnCntnr {
+      display: none;
+      @include md {
+        display: flex;
+      }
+    }
   }
 
   .cartImage {
