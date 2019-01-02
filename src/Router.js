@@ -1,8 +1,8 @@
 import { addEvents } from './services/Utils';
 import shoppingService from './services/ShoppingService';
 
-export default class Router {
-    constructor(routes, props) {
+class Router {
+    setRoutes(routes, props) {
         this.routes = routes;
         this.props = props;
         this.parent = props.parent;
@@ -34,3 +34,4 @@ export default class Router {
         }
     }
 }
+export default new Router();

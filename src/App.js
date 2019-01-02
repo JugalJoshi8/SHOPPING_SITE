@@ -2,7 +2,7 @@ import Login from './components/login/Login';
 import SignUp from './components/sign-up/SignUp';
 import HomePage from './components/home-page/HomePage';
 import Products from './components/products/Products';
-import Router from './Router';
+import router from './Router';
 import './styles/styles.scss';
 
 class App {
@@ -45,7 +45,7 @@ class App {
         component: Products
       }
     ];
-    this.router = new Router(routes, this.childProps);
+    router.setRoutes(routes, this.childProps);
   }
 }
 

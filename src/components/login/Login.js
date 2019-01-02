@@ -2,8 +2,8 @@
 import ShoppingHeader from './../shopping-header/ShoppingHeader';
 import ShoppingFooter from './../shopping-footer/ShoppingFooter';
 import Input from './../input/Input'; 
-import SignUp from './../sign-up/SignUp';
 import {addEvents} from './../../services/Utils';
+import router from './../../Router';
 
 export default class Login {
     constructor(props) {
@@ -27,7 +27,7 @@ export default class Login {
             isFormValid = isFormValid && isInputValid;
         });
         if(isFormValid) {
-            this.props.onLoginSuccess();
+           router.showRouteComponent('/homepage');
         }
     }
 

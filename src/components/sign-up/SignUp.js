@@ -3,6 +3,7 @@ import ShoppingHeader from './../shopping-header/ShoppingHeader';
 import ShoppingFooter from './../shopping-footer/ShoppingFooter';
 import Input from './../input/Input';
 import { addEvents } from './../../services/Utils';
+import router from './../../Router';
 
 export default class SignUp {
     constructor(props) {
@@ -25,8 +26,9 @@ export default class SignUp {
             const isInputValid = input.checkForValidation();
             isFormValid = isFormValid && isInputValid;
         });
+        debugger;
         if (isFormValid) {
-            this.props.onLoginSuccess();
+            router.showRouteComponent('/homepage');
         }
     }
 
