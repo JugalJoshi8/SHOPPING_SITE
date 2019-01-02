@@ -2,7 +2,7 @@ import shoppingService from './../../services/ShoppingService';
 import ShoppingHeader from './../shopping-header/ShoppingHeader';
 import ShoppingFooter from './../shopping-footer/ShoppingFooter';
 import Product from './../product/Product';
-import {addEvents} from './../../services/Utils';
+import { addEvents } from './../../services/Utils';
 import CartDetails from './../cart-details/CartDetails';
 
 export default class Products {
@@ -16,7 +16,7 @@ export default class Products {
             this.products = res[0].data;
             this.filteredProducts = [...this.products];
             this.categories = res[1].data.filter(category => category.enabled).map(category => {
-                return {name: category.name, id: category.id}
+                return { name: category.name, id: category.id }
             });
             this.render();
             addEvents({
@@ -25,8 +25,8 @@ export default class Products {
                     handler: e => this.onCategorySelect(e, true)
                 },
                 '#category-select': {
-                    name: 'click',
-                    handler: e => this.onCategoryDropdownClick(e)
+                    click: e => this.onCategoryDropdownClick(e, true),
+                    keydown: e => this.onCategoryDropdownClick(e)
                 },
                 '.category-list__option': {
                     name: 'click',
@@ -35,9 +35,57 @@ export default class Products {
                 '.products': {
                     name: 'click',
                     handler: e => this.hideCategoryDropdown()
+                },
+                '#category-list': {
+                    name: 'keydown',
+                    handler: e => this.changeSelectedOption(e)
                 }
             }, this.parent);
         });
+    }
+
+    changeSelectedOption(e) {
+        const keyCode = e.keyCode;
+        console.log(keyCode);
+        const currentSelected = this.categoryOptions.querySelector('.selected');
+        let nextSelected;
+        if(keyCode === 40 || keyCode === 38) {
+            //down arrow key
+            if(keyCode === 40) {
+                nextSelected = currentSelected.nextElementSibling ;
+            }
+            //up arrow key
+            else {
+                nextSelected = currentSelected.previousElementSibling ;
+            }
+            if(nextSelected) {
+                currentSelected.classList.remove('selected');
+                nextSelected.classList.add('selected');
+                this.categoryOptions.setAttribute('aria-activedescendant', nextSelected.getAttribute('id'));
+            }
+        }
+        // enter key
+        else if(keyCode === 13) {
+            this.onCategoryDropdownSelect({target: currentSelected});
+        }
+        
+    }
+
+    onCategoryDropdownClick(e, isClick) {
+        e.stopPropagation();
+        const isExpanded = this.categorySelect.getAttribute('aria-expanded');
+        if (isExpanded === "true") {
+            this.hideCategoryDropdown();
+        }
+        else if (isClick || e.keyCode === 32 || e.keyCode === 13) {
+            this.categorySelect.setAttribute('aria-expanded', true);
+            this.categoryOptions.classList.add('show-options');
+            this.categoryOptions.setAttribute('tabindex', '0');
+            this.categoryOptions.focus();
+            const selectedOption = this.categoryOptions.querySelector('.selected') || this.categoryOptions.children[0];
+            selectedOption.classList.add('selected');
+            this.categoryOptions.setAttribute('aria-activedescendant', selectedOption.getAttribute('id'));
+        }
     }
 
     addProductToCart(product) {
@@ -45,26 +93,14 @@ export default class Products {
     }
 
     hideCategoryDropdown() {
-        if(this.categorySelect.getAttribute('aria-expanded')) {
+        if (this.categorySelect.getAttribute('aria-expanded')) {
             this.categorySelect.setAttribute('aria-expanded', false);
             this.categoryOptions.classList.remove('show-options');
         }
     }
 
-    onCategoryDropdownClick(e) {
-        e.stopPropagation();
-        const isExpanded = this.categorySelect.getAttribute('aria-expanded');
-        if(isExpanded === "false") {
-            this.categorySelect.setAttribute('aria-expanded', true);
-            this.categoryOptions.classList.add('show-options');
-        }
-        else {
-            this.hideCategoryDropdown();
-        }
-    }
-
     onCategoryDropdownSelect(e) {
-        e.stopPropagation();
+        e.stopPropagation && e.stopPropagation();
         this.onCategorySelect(e, false);
         this.categorySelect.innerText = e.target.innerHTML;
         this.categoryOptions.querySelectorAll('li').forEach(li => li.setAttribute('aria-selected', false));
@@ -73,13 +109,13 @@ export default class Products {
     }
 
     onCategorySelect(e, navClick) {
-        if(Array.from(e.target.classList).indexOf('selected') > -1) {
+        if (e.target.getAttribute('aria-selected') === "true") {
             e.target.classList.remove('selected');
             this.filteredProducts = this.products;
 
         }
         else {
-            const listItems = navClick ? this.categoryListItems : this.categoryDropdownItems; 
+            const listItems = navClick ? this.categoryListItems : this.categoryDropdownItems;
             Array.from(listItems).forEach(li => li.classList.remove('selected'));
             e.target.classList.add('selected');
             const categoryId = e.target.getAttribute('category-id');
@@ -87,8 +123,10 @@ export default class Products {
         }
         this.productCntr.innerHTML = '';
         this.filteredProducts.forEach(product => {
-            new Product({parent: this.productCntr, product, addProductToCart: this.addProductToCart});
+            new Product({ parent: this.productCntr, product, addProductToCart: this.addProductToCart });
         });
+        this.categoryOptions.setAttribute('tabindex', '-1');
+        this.categorySelect.focus();
     }
 
     onCartClick() {
@@ -99,15 +137,16 @@ export default class Products {
         const markup = `
             <article class = 'products flex flex--v'>
                 <section id = 'header-cntr'></section>
-                <div aria-haspopup="listbox" id = 'category-select' tabindex="0" aria-autocomplete="none" class = 'button button--primary category__select' role="combobox" aria-owns="category-list" aria-expanded="false" aria-labelledby="category-select">Select a Category</div>
+                <label id = 'category-label'>Select a Category</label>
+                <div tabindex = "0" aria-haspopup="listbox" id = 'category-select' aria-autocomplete="none" class = 'button button--primary category__select' aria-expanded="false" aria-labelledby = "category-label category-select">Select a Category</div>
                 <div class = 'category-options'>
-                    <ul  role="listbox" id = 'category-list' class = 'category-list' aria-label = 'Select a Category'>
-                        ${this.categories.map(category => `<li role="option" category-id = ${category.id} class = "light-bg p1 lg-txt category-list__option bold-txt">${category.name}</li>`).join('')}
+                    <ul  tabindex="-1" role="listbox" id = 'category-list' class = 'category-list' aria-labelledby = "category-label">
+                        ${this.categories.map(category => `<li id = ${category.id} role="option" category-id = ${category.id} class = "light-bg p1 lg-txt category-list__option bold-txt">${category.name}</li>`).join('')}
                     </ul>
                 </div>
                 <article class = 'flex flex--ast flex1 o-auto'>
                     <nav class = 'flex1 products__nav'>
-                        <ul class = 'category-list' role="listbox">
+                        <ul class = 'category-list' role="listbox" tabindex = 0>
                             ${this.categories.map(category => `<li category-id = ${category.id} class = "category-list__item bold-txt">${category.name}</li>`).join('')}
                         </ul>
                     </nav>
@@ -126,13 +165,13 @@ export default class Products {
         this.categoryOptions = this.parent.querySelector('#category-list');
         this.categoryDropdownItems = this.parent.querySelectorAll('#category-list>li');
         this.categoryListItems = this.parent.querySelectorAll('.category-list__item');
-        new ShoppingHeader({...this.props, parent: this.parent.querySelector('#header-cntr'), onCartClick: this.onCartClick});
-        new ShoppingFooter({parent: this.parent.querySelector('footer')});
+        new ShoppingHeader({ ...this.props, parent: this.parent.querySelector('#header-cntr'), onCartClick: this.onCartClick });
+        new ShoppingFooter({ parent: this.parent.querySelector('footer') });
         this.filteredProducts.forEach((product, index) => {
-            new Product({parent: this.productCntr, product, addProductToCart: this.addProductToCart, key: index});
+            new Product({ parent: this.productCntr, product, addProductToCart: this.addProductToCart, key: index });
         });
         this.cartDetailsCntr = this.parent.querySelector('#cart-details-cntr');
-        this.cartDetails = new CartDetails({parent: this.cartDetailsCntr});
+        this.cartDetails = new CartDetails({ parent: this.cartDetailsCntr });
 
     }
 }

@@ -96,6 +96,8 @@ export default class Carousel {
         else {
             this.nextButton.disabled = false;
         }
+       Array.from(this.carousel.children).forEach(element => element.setAttribute('aria-hidden', 'true'));
+       this.carousel.children[this.currentSlide].setAttribute('aria-hidden', 'false');
         Array.from(this.slidePoints.querySelectorAll('div')).forEach(element => element.classList.remove('currentPoint'));
         this.slidePoints.querySelector(':nth-child(' + (this.currentSlide + 1) + ')').classList.add('currentPoint')
     }
