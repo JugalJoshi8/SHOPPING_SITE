@@ -1,10 +1,10 @@
 import ajaxService from './AJAXService';
 class ShoppingService {
     constructor(url) {
-        this.cartItems = [];
-        this.cartItemsLength = 0;
+        this.cartItems = sessionStorage.cartItems ? JSON.parse(sessionStorage.cartItems) : [];
+        this.cartItemsLength = sessionStorage.cartItemsLength ? parseInt(sessionStorage.cartItemsLength) : 0;
         this.cartSubscribers = [];
-        this.totalPrice = 0;
+        this.totalPrice = sessionStorage.totalPrice ? parseInt(sessionStorage.totalPrice) : 0;
     }
 
     addCartSubscriber(func) {
@@ -52,6 +52,12 @@ class ShoppingService {
         return this.cartItems;
     }
 
+    setSessionStorage() {
+        sessionStorage.totalPrice = this.totalPrice;
+        sessionStorage.cartItemsLength = this.cartItemsLength;
+        sessionStorage.cartItems = JSON.stringify(this.cartItems);
+    }
+
     addItemToCart(item) {
         return ajaxService.post('/addToCart', item)
           .then(_ => {
@@ -66,6 +72,7 @@ class ShoppingService {
               this.cartItemsLength++;
               this.totalPrice += item.price;
               this.notifyCartSubscribers(existingItem);
+              this.setSessionStorage();
               return this.cartItemsLength;
           })
           .catch(_ => console.log('Error occurred when adding Item to cart'));
@@ -76,6 +83,7 @@ class ShoppingService {
         this.cartItemsLength++;
         this.totalPrice += item.price;
         this.notifyCartSubscribers(item);
+        this.setSessionStorage();
     }
 
     decreaseItemQuantity(item) {
@@ -86,6 +94,7 @@ class ShoppingService {
             this.cartItems.splice(this.cartItems.findIndex(cartItem => item.id === cartItem.id));
         }
         this.notifyCartSubscribers(item);
+        this.setSessionStorage();
     }
 }
 
