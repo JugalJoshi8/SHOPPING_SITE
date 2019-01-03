@@ -1,10 +1,10 @@
 import ajaxService from './AJAXService';
 class ShoppingService {
     constructor(url) {
-        this.cartItems = sessionStorage.cartItems ? JSON.parse(sessionStorage.cartItems) : [];
-        this.cartItemsLength = sessionStorage.cartItemsLength ? parseInt(sessionStorage.cartItemsLength) : 0;
+        this.cartItems = sessionStorage.getItem('cartItems') ? JSON.parse(sessionStorage.getItem('cartItems')) : [];
+        this.cartItemsLength =  sessionStorage.getItem('cartItemsLength') ? parseInt(sessionStorage.getItem('cartItemsLength')) : 0;
         this.cartSubscribers = [];
-        this.totalPrice = sessionStorage.totalPrice ? parseInt(sessionStorage.totalPrice) : 0;
+        this.totalPrice = sessionStorage.getItem('totalPrice') ? parseInt(sessionStorage.getItem('totalPrice')) : 0;
     }
 
     addCartSubscriber(func) {
@@ -53,9 +53,9 @@ class ShoppingService {
     }
 
     setSessionStorage() {
-        sessionStorage.totalPrice = this.totalPrice;
-        sessionStorage.cartItemsLength = this.cartItemsLength;
-        sessionStorage.cartItems = JSON.stringify(this.cartItems);
+        sessionStorage.setItem('totalPrice', this.totalPrice);
+        sessionStorage.setItem('cartItemsLength', this.cartItemsLength);
+        sessionStorage.setItem('cartItems', JSON.stringify(this.cartItems));
     }
 
     addItemToCart(item) {
