@@ -11,7 +11,10 @@ export default class CartDetails {
         addEvents({
             '.closeButton, #checkout, #start-shopping': {
                 'name': 'click',
-                'handler': _ => this.overlay.classList.add('scale0')
+                'handler': _ =>  { 
+                    this.overlay.classList.add('scale0');
+                    this.overlay.setAttribute('aria-hidden', 'true');
+                }
             }
         }, this.props.parent);
         //this.overlay.classList.add('scale0');
@@ -20,6 +23,7 @@ export default class CartDetails {
 
     show() {
         this.overlay.classList.remove('scale0');
+        this.overlay.setAttribute('aria-hidden', 'false');
     }
 
     onCartUpdate({cartItems, cartItemsLength, changedItem, totalPrice}) {
@@ -45,14 +49,14 @@ export default class CartDetails {
         const items = shoppingService.cartItems;
         const totalPrice = shoppingService.totalPrice;
         const markup = `
-            <div class = 'cart-overlay scale0'>
+            <div class = 'cart-overlay scale0 aria-hidden = true'>
                 <div class = 'cart-dtls flex flex--v'>
                     <header class="cart-dtls__header pt1 pb1 pl1 pr1 flex flex--jsb">
                         <h1 class = 'cart-header lg-txt bold-txt'>My Cart ${items.length ? (items.length > 1 ? `<span class = 'md-txt normal-txt'>(${items.length} items)</span>` : '<span class = "md-txt normal-txt">(1 item)</span>') : ''}</h2>
                         <button aria-label = 'Close Cart Details' class = 'closeButton'>
                         </button>
                     </header>
-                    <div id = 'cart' class = 'flex flex1 flex--v'>
+                    <div id = 'full-cart' class = 'flex flex1 flex--v'>
                         <div class = 'flex1 o-auto'>
                             <ul class = 'cart-items pt1 flex1'>
                             </ul>
@@ -84,7 +88,7 @@ export default class CartDetails {
         this.cartHeader = this.props.parent.querySelector('.cart-header');
         this.overlay = this.props.parent.querySelector('.cart-overlay');
         this.totalPrice = this.props.parent.querySelector('.total-price');
-        this.cart = this.props.parent.querySelector('#cart');
+        this.cart = this.props.parent.querySelector('#full-cart');
         this.emptyCart = this.props.parent.querySelector('#empty-cart');
         if(items.length) {
             this.cart.classList.remove('hide');

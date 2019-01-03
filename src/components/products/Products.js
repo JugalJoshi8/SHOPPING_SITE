@@ -45,18 +45,27 @@ export default class Products {
     }
 
     changeSelectedOption(e) {
+        e.stopPropagation();
         const keyCode = e.keyCode;
         console.log(keyCode);
         const currentSelected = this.categoryOptions.querySelector('.selected');
         let nextSelected;
-        if(keyCode === 40 || keyCode === 38) {
+        if(keyCode === 40 || keyCode === 38 || keyCode === 36 || keyCode === 35) {
             //down arrow key
             if(keyCode === 40) {
                 nextSelected = currentSelected.nextElementSibling ;
             }
             //up arrow key
-            else {
+            else if(keyCode === 38) {
                 nextSelected = currentSelected.previousElementSibling ;
+            }
+             // home key
+            else if(keyCode === 36) {
+                nextSelected = this.categoryOptions.children[0]
+            }
+            // end key
+            else {
+                nextSelected = this.categoryOptions.children[this.categoryOptions.children.length - 1]
             }
             if(nextSelected) {
                 currentSelected.classList.remove('selected');
@@ -71,8 +80,6 @@ export default class Products {
         // escape key
         else if(keyCode === 27) {
             this.hideCategoryDropdown();
-            this.categoryOptions.setAttribute('tabindex', '-1');
-            this.categorySelect.focus();
         }
         
     }
@@ -102,15 +109,14 @@ export default class Products {
         if (this.categorySelect.getAttribute('aria-expanded')) {
             this.categorySelect.setAttribute('aria-expanded', false);
             this.categoryOptions.classList.remove('show-options');
+             this.categoryOptions.setAttribute('tabindex', '-1');
+            this.categorySelect.focus();
         }
     }
 
     onCategoryDropdownSelect(e) {
         e.stopPropagation && e.stopPropagation();
         this.onCategorySelect(e, false);
-        this.categorySelect.innerText = e.target.innerHTML;
-        this.categoryOptions.querySelectorAll('li').forEach(li => li.setAttribute('aria-selected', false));
-        e.target.setAttribute('aria-selected', true);
         this.hideCategoryDropdown();
     }
 
@@ -118,9 +124,13 @@ export default class Products {
         if (e.target.getAttribute('aria-selected') === "true") {
             e.target.classList.remove('selected');
             this.filteredProducts = this.products;
-
+            e.target.setAttribute('aria-selected', "false");
+            this.categorySelect.innerHTML = 'Select a Category';
         }
         else {
+            Array.from(this.categoryOptions.querySelectorAll('li')).forEach(li => li.setAttribute('aria-selected', 'false'));
+            e.target.setAttribute('aria-selected', true);
+            this.categorySelect.innerHTML = e.target.innerHTML;
             const listItems = navClick ? this.categoryListItems : this.categoryDropdownItems;
             Array.from(listItems).forEach(li => li.classList.remove('selected'));
             e.target.classList.add('selected');
