@@ -76,40 +76,40 @@ export default class Input {
                 markup = `
                 <label id = label-${this.type} class = 'label--hidden label' for="${this.type}">First Name</label>
                 <input aria-labelledby = 'label-${this.type}' class = 'bold-txt input block mb1 p1' placeholder = 'First Name' id = ${this.type} name = 'first-name' type="text">
-                <div class = 'invalid-${this.type} hide mb1'>Please Enter First Name</div>
+                <div class = 'invalid-txt invalid-${this.type} hide mb1'>Please Enter First Name</div>
                 `;
                 break;
             case 'last-name':
                 markup = `
                 <label id = label-${this.type} class = 'label--hidden label' for="${this.type}">Last Name</label>
                 <input aria-labelledby = 'label-${this.type}' class = 'bold-txt input block mb1 p1' placeholder = 'Last Name' id = ${this.type} name = 'last-name' type="text">
-                <div class = 'invalid-${this.type} hide mb1'>Please Enter Last Name</div>
+                <div class = 'invalid-txt invalid-${this.type} hide mb1'>Please Enter Last Name</div>
                 `;
                 break;
             case 'email':
                 markup = `
                 <label id = label-${this.type} class = 'label--hidden label' for="${this.type}">Email</label>
                 <input aria-labelledby = 'label-${this.type}' class = 'bold-txt input block mb1 p1' placeholder = 'Email' id = ${this.type} name = 'email' type="email">
-                <div class = 'invalid-${this.type} hide mb1'>Please Enter Valid Email</div>
+                <div class = 'invalid-txt invalid-${this.type} hide mb1'>Please Enter Valid Email</div>
                 `;
                 break;
             case 'password':
                 markup = `
                     <label id = label-${this.type} class = 'label--hidden label' for="${this.type}" >Password</label>
                     <input  aria-labelledby = 'label-${this.type}' id = ${this.type} name = 'password' class = 'p1 input mb1 bold-txt' placeholder = 'Password' type="password">
-                    <div class = 'invalid-${this.type} hide mb1'>Password should have minimum 6 characters with 1 number and 1 alphabet and not contain spaces</div>
+                    <div class = 'invalid-txt invalid-${this.type} hide mb1'>Password should have minimum 6 characters with 1 number and 1 alphabet and not contain spaces</div>
                 `;
                 break;
             case 'confirm-password':
                 markup = `
                     <label id = label-${this.type} class = 'label--hidden label' for="${this.type}" name = 'password'>Confirm Password</label>
                     <input  aria-labelledby = 'label-${this.type}' id = ${this.type} name = 'confirm-password' class = 'p1 input mb1 bold-txt' placeholder = 'Confirm Password' type="password">
-                    <div class = 'invalid-${this.type} hide mb1'>Passwords do not match</div>
+                    <div class = 'invalid-txt invalid-${this.type} hide mb1'>Passwords do not match</div>
                 `;
                 break;
             case 'submit':
                 markup = `
-                <input class = 'input block white-txt bold-txt mt1' type = 'submit' value = '${this.value}'>
+                <input class = 'invalid-txt input block white-txt bold-txt mt1' type = 'submit' value = '${this.value}'>
                 `;
                 break;
             default:

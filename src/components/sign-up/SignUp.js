@@ -26,7 +26,6 @@ export default class SignUp {
             const isInputValid = input.checkForValidation();
             isFormValid = isFormValid && isInputValid;
         });
-        debugger;
         if (isFormValid) {
             router.showRouteComponent('/homepage');
         }

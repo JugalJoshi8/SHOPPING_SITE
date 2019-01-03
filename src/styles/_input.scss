@@ -38,3 +38,10 @@
 .invalid {
     border: solid 2px red !important;
 }
+
+.invalid-txt {
+    width: 100%;
+    @include md {
+        width: 300px;
+    }
+}
