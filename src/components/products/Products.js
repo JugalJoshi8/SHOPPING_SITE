@@ -160,16 +160,18 @@ class Products {
                         ${this.categories.map(category => `<li id = ${category.id} role="option" category-id = ${category.id} class = "light-bg p1 lg-txt category-list__option bold-txt">${category.name}</li>`).join('')}
                     </ul>
                 </div>
-                <article class = 'flex flex--ast flex1 o-auto'>
+                <article class = 'o-auto'>
+                    <section class = 'flex'>
                     <nav class = 'flex1 products__nav'>
                         <ul class = 'category-list' role="listbox">
-                            ${this.categories.map(category => `<li><button category-id = ${category.id} class = "category-list__item bold-txt">${category.name}</button></li>`).join('')}
+                            ${this.categories.map(category => `<li><button category-id = ${category.id} class = "category-list__item bold-txt md-txt">${category.name}</button></li>`).join('')}
                         </ul>
                     </nav>
                     <section class = 'flex5'>
-                        <section id = 'product-cntr' class = 'flex'></section>
+                        <section role="region" aria-live="polite" id = 'product-cntr' class = 'flex'></section>
                         <footer class = 'center-txt pl0 light-bg' ></footer>
                     <section>
+                    </section>
                 </article>
                 <article role="region" id = 'cart-details-cntr' aria-live="polite">
                 </article>

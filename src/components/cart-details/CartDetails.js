@@ -14,6 +14,7 @@ export default class CartDetails {
                 'handler': _ =>  { 
                     this.overlay.classList.add('scale0');
                     this.overlay.setAttribute('aria-hidden', 'true');
+                    this.previousActiveElement.focus();
                 }
             }
         }, this.props.parent);
@@ -22,6 +23,7 @@ export default class CartDetails {
     }
 
     show() {
+        this.previousActiveElement = document.activeElement;
         this.overlay.classList.remove('scale0');
         this.overlay.setAttribute('aria-hidden', 'false');
         this.closeBtn.focus();
