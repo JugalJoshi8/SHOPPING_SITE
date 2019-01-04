@@ -24,6 +24,7 @@ export default class CartDetails {
     show() {
         this.overlay.classList.remove('scale0');
         this.overlay.setAttribute('aria-hidden', 'false');
+        this.closeBtn.focus();
     }
 
     onCartUpdate({cartItems, cartItemsLength, changedItem, totalPrice}) {
@@ -91,6 +92,7 @@ export default class CartDetails {
         this.totalPrice = this.props.parent.querySelector('.total-price');
         this.cart = this.props.parent.querySelector('#full-cart');
         this.emptyCart = this.props.parent.querySelector('#empty-cart');
+        this.closeBtn = this.props.parent.querySelector('.closeButton');
         if(items.length) {
             this.cart.classList.remove('hide');
             this.emptyCart.classList.add('hide');

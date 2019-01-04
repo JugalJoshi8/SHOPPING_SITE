@@ -19,8 +19,8 @@ const serviceHandler = (component) => {
             });
             const markup = `
                 <div id = 'router'>
-                    <div class = 'hide' id = 'spinner'></div>
                     <div id = 'component'></div>
+                    <div class = 'hide' id = 'spinner'></div>
                 </div>
             `;
             this.parent.innerHTML = markup;

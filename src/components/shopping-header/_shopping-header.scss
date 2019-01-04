@@ -77,11 +77,11 @@
   .cart {
     background-color: $light;
     padding: 0.5rem;
+    border: none;
   }
 
   .cart__button {
     border: none;
-    outline: none;
     background: transparent;
     &:not(:last-child) {
       margin-right: 1rem;

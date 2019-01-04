@@ -44,8 +44,8 @@ export default class ShoppingHeader {
                 <div class=logo></div>
                 <nav>
                     <ul>
-                        <li id = 'home' route = '/homepage'>Home</li>
-                        <li id = 'products' route = '/products'>Products</li>
+                        <li tabindex = 0 role = 'link' id = 'home' route = '/homepage'>Home</li>
+                        <li tabindex = 0 role = 'link' id = 'products' route = '/products'>Products</li>
                     </ul>
                 </nav>
                 <div class = cartBtnCntnr>
@@ -53,10 +53,10 @@ export default class ShoppingHeader {
                         <button id = 'sign-in' route = '/login' class = cart__button>Signin</button>
                         <button id = 'register' route = '/signup' class = cart__button>Register</button>
                     </div>
-                    <div class = 'cart' id = 'cart'>
+                    <button class = 'cart' id = 'cart'>
                         <div class = cartImage></div>
                         <div><span id = 'cartItems'>${shoppingService.cartItemsLength || 0}</span><span id = 'itemsTxt'> items</span></div>
-                    </div>
+                    </button>
                 </div>
             </header>
             </div>
