@@ -26,7 +26,10 @@ const CSSLoader = {
 
 
 module.exports = {
-    entry: ['@babel/polyfill', './src'],
+    entry: {
+        'babel-polyfill': ['@babel/polyfill'],
+        'main': './src/index.js',
+    },
     module: {
         rules: [
             {
