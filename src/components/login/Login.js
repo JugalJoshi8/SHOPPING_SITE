@@ -4,19 +4,25 @@ import ShoppingFooter from './../shopping-footer/ShoppingFooter';
 import Input from './../input/Input'; 
 import {addEvents} from './../../services/Utils';
 import router from './../../Router';
+import CartDetails from './../cart-details/CartDetails';
 
 export default class Login {
     constructor(props) {
         this.parent = props.parent;
         this.props = props;
-        this.render();
+        this.onCartClick = this.onCartClick.bind(this);
         this.onFormSubmit = this.onFormSubmit.bind(this);
+        this.render();
         addEvents({
             '.login-form' : {
                 'name': 'submit',
                 'handler': this.onFormSubmit
             }
         }, this.parent);
+    }
+
+    onCartClick() {
+        this.cartDetails.show();
     }
 
     onFormSubmit(e) {
@@ -29,10 +35,6 @@ export default class Login {
         if(isFormValid) {
            router.showRouteComponent('/homepage');
         }
-    }
-
-    onRegister() {
-
     }
 
     render() {
@@ -57,14 +59,18 @@ export default class Login {
                 </form>
                </div>
                <footer class = 'pr5 pl5' ></footer>
+               <article role="region" id = 'cart-details-cntr' aria-live="polite">
+                </article>
             </section>
             `;
         this.parent.innerHTML = markup;
-        new ShoppingHeader({...this.props, parent: this.parent.querySelector('#header-cntr')});
+        new ShoppingHeader({...this.props, parent: this.parent.querySelector('#header-cntr'), onCartClick: this.onCartClick});
         new ShoppingFooter({parent: this.parent.querySelector('footer')});
         this.inputs = [];
         this.inputs.push(new Input({type: 'email', parent: this.parent.querySelector('.email-cntr')}));
         this.inputs.push(new Input({type: 'password', parent: this.parent.querySelector('.password-cntr'), minlength: 6, alphanumeric: true, noSpaces: true}));
         new Input({type: 'submit', parent: this.parent.querySelector('.submit-cntr'), value: 'Login'});
+        this.cartDetailsCntr = this.parent.querySelector('#cart-details-cntr');
+        this.cartDetails = new CartDetails({ parent: this.cartDetailsCntr });
     }
 }

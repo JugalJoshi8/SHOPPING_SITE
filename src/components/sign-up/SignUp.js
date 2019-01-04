@@ -4,11 +4,13 @@ import ShoppingFooter from './../shopping-footer/ShoppingFooter';
 import Input from './../input/Input';
 import { addEvents } from './../../services/Utils';
 import router from './../../Router';
+import CartDetails from './../cart-details/CartDetails';
 
 export default class SignUp {
     constructor(props) {
         this.parent = props.parent;
         this.props = props;
+        this.onCartClick = this.onCartClick.bind(this);
         this.render();
         this.onFormSubmit = this.onFormSubmit.bind(this);
         addEvents({
@@ -17,6 +19,10 @@ export default class SignUp {
                 'handler': this.onFormSubmit
             }
         }, this.parent);
+    }
+
+    onCartClick() {
+        this.cartDetails.show();
     }
 
     onFormSubmit(e) {
@@ -62,10 +68,12 @@ export default class SignUp {
                 </form>
                </div>
                <footer class = 'pr5 pl5' ></footer>
+               <article role="region" id = 'cart-details-cntr' aria-live="polite">
+                </article>
             </section>
             `;
         this.parent.innerHTML = markup;
-        new ShoppingHeader({ ...this.props, parent: this.parent.querySelector('#header-cntr')});
+        new ShoppingHeader({ ...this.props, parent: this.parent.querySelector('#header-cntr'), onCartClick: this.onCartClick});
         new ShoppingFooter({ parent: this.parent.querySelector('footer') });
         this.inputs = [];
         this.inputs.push(new Input({ type: 'first-name', parent: this.parent.querySelector('.first-name-cntr') }));
@@ -75,5 +83,7 @@ export default class SignUp {
         this.inputs.push(passwordInput);
         this.inputs.push(new Input({ type: 'confirm-password', parent: this.parent.querySelector('.confirm-password-cntr'), minlength: 6, alphanumeric: true, noSpaces: true, passwordInput }));
         new Input({ type: 'submit', parent: this.parent.querySelector('.submit-cntr'), value: 'Signup' });
+        this.cartDetailsCntr = this.parent.querySelector('#cart-details-cntr');
+        this.cartDetails = new CartDetails({ parent: this.cartDetailsCntr });
     }
 }

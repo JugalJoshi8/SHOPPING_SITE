@@ -47,12 +47,13 @@ export default class CartDetails {
 
     render() {
         const items = shoppingService.cartItems;
+        const cartItemsLength = shoppingService.cartItemsLength;
         const totalPrice = shoppingService.totalPrice;
         const markup = `
             <div role = 'dialog' class = 'cart-overlay scale0 aria-hidden = true'>
                 <div class = 'cart-dtls flex flex--v'>
                     <header class="cart-dtls__header pt1 pb1 pl1 pr1 flex flex--jsb">
-                        <h1 class = 'cart-header lg-txt bold-txt'>My Cart ${items.length ? (items.length > 1 ? `<span class = 'md-txt normal-txt'>(${items.length} items)</span>` : '<span class = "md-txt normal-txt">(1 item)</span>') : ''}</h2>
+                        <h1 class = 'cart-header lg-txt bold-txt'>My Cart ${cartItemsLength ? (cartItemsLength > 1 ? `<span class = 'md-txt normal-txt'>(${cartItemsLength} items)</span>` : '<span class = "md-txt normal-txt">(1 item)</span>') : ''}</h2>
                         <button aria-label = 'Close Cart Details' class = 'closeButton'>
                         </button>
                     </header>
@@ -98,5 +99,9 @@ export default class CartDetails {
             this.cart.classList.add('hide');
             this.emptyCart.classList.remove('hide');
         }
+        // stop intial load animation
+        setTimeout(_ => {
+            this.overlay.classList.add('animate');
+        }, 100);
     }
 }

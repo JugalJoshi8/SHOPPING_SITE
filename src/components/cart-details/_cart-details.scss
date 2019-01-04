@@ -15,7 +15,9 @@
         bottom: 0;
         margin: 0;
         background-color: rgba($color: #000000, $alpha: 0.7);
-        transition: transform 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+        &.animate {
+            transition: transform 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
     }
 }
 
@@ -60,6 +62,9 @@
     }
 }
 
+.scale0{
+    transform: scale(0);
+}
 
 
 
