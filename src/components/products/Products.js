@@ -162,8 +162,8 @@ class Products {
                 </div>
                 <article class = 'flex flex--ast flex1 o-auto'>
                     <nav class = 'flex1 products__nav'>
-                        <ul class = 'category-list' role="listbox" tabindex = 0>
-                            ${this.categories.map(category => `<li category-id = ${category.id} class = "category-list__item bold-txt">${category.name}</li>`).join('')}
+                        <ul class = 'category-list' role="listbox">
+                            ${this.categories.map(category => `<li><button category-id = ${category.id} class = "category-list__item bold-txt">${category.name}</button></li>`).join('')}
                         </ul>
                     </nav>
                     <section class = 'flex5'>
