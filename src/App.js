@@ -14,7 +14,7 @@ class App {
   render() {
     const markup = `
         <div id = 'app' class="app p1">
-          <div id="child-cntr">
+          <div id="child-cntr" aria-live="assertive" role="region">
           </div>
         </div>
     `;

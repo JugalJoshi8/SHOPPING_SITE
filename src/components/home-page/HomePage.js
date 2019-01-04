@@ -33,7 +33,7 @@ import serviceHandler from './../service-handler/ServiceHandler';
                     <section id = 'category-cntr'></section>
                     <footer class = 'center-txt pl1 light-bg' ></footer>
                 </div>
-                <article id = 'cart-details-cntr'>
+                <article role="region" id = 'cart-details-cntr' aria-live="polite">
                 </article>
             </article>
         `;

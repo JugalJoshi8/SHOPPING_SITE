@@ -40,7 +40,7 @@ export default class ShoppingHeader {
     render() {
         const markup = `
        <div class = 'shopping-header'>     
-       <header>
+       <header role="banner">
                 <div class=logo></div>
                 <nav>
                     <ul>

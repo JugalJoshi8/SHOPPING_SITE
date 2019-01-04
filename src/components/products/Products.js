@@ -48,7 +48,6 @@ class Products {
     changeSelectedOption(e) {
         e.stopPropagation();
         const keyCode = e.keyCode;
-        console.log(keyCode);
         const currentSelected = this.categoryOptions.querySelector('.selected');
         let nextSelected;
         if(keyCode === 40 || keyCode === 38 || keyCode === 36 || keyCode === 35) {
@@ -156,7 +155,7 @@ class Products {
                 <section id = 'header-cntr'></section>
                 <label id = 'category-label'>Select a Category</label>
                 <div tabindex = "0" aria-haspopup="listbox" id = 'category-select' aria-autocomplete="none" class = 'button button--primary category__select' aria-expanded="false" aria-labelledby = "category-label category-select">Select a Category</div>
-                <div class = 'category-options'>
+                <div class = 'category-options' role="region" aria-live="polite">
                     <ul  tabindex="-1" role="listbox" id = 'category-list' class = 'category-list' aria-labelledby = "category-label">
                         ${this.categories.map(category => `<li id = ${category.id} role="option" category-id = ${category.id} class = "light-bg p1 lg-txt category-list__option bold-txt">${category.name}</li>`).join('')}
                     </ul>
@@ -172,7 +171,7 @@ class Products {
                         <footer class = 'center-txt pl0 light-bg' ></footer>
                     <section>
                 </article>
-                <article id = 'cart-details-cntr'>
+                <article role="region" id = 'cart-details-cntr' aria-live="polite">
                 </article>
             </article>
         `;
