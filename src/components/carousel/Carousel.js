@@ -1,4 +1,4 @@
-import {addEvents} from './../../services/Utils';
+import { addEvents } from './../../services/Utils';
 
 export default class Carousel {
     constructor(props) {
@@ -32,7 +32,7 @@ export default class Carousel {
 
     onTouchMove(e) {
         this.isSwipe = true;
-        if(e && e.touches && e.touches.length) {
+        if (e && e.touches && e.touches.length) {
             this.touchPointEnd = e.touches[0].pageX;
         }
     }
@@ -54,7 +54,7 @@ export default class Carousel {
         const ItemComponent = this.props.itemComponent;
         const carouselCntr = this.parent.querySelector('.carousel-content');
         this.props.items.forEach((item, index) => {
-            new ItemComponent({parent: carouselCntr, item, key: index});
+            new ItemComponent({ parent: carouselCntr, item, key: index });
         });
         this.carouselParent = this.parent.querySelector('.carousel');
         this.carousel = this.parent.querySelector('.carousel-content');
@@ -67,14 +67,14 @@ export default class Carousel {
 
     onNavClick(isPrev) {
         const translateBy = this.carouselParent.offsetWidth;
-        if(isPrev) {
-            if(this.currentSlide === 0) {
+        if (isPrev) {
+            if (this.currentSlide === 0) {
                 return;
             }
             this.currentSlide--;
         }
         else {
-            if(this.currentSlide === this.props.items.length - 1) {
+            if (this.currentSlide === this.props.items.length - 1) {
                 return;
             }
             this.currentSlide++;
@@ -84,53 +84,58 @@ export default class Carousel {
     }
 
     showHideNav() {
-        if(this.currentSlide <= 0) {
+        if (this.currentSlide <= 0) {
             this.prevButton.disabled = true;
         }
         else {
             this.prevButton.disabled = false;
         }
-        if(this.currentSlide >= this.totalSlides) {
+        if (this.currentSlide >= this.totalSlides) {
             this.nextButton.disabled = true;
         }
         else {
             this.nextButton.disabled = false;
         }
-       Array.from(this.carousel.children).forEach(element => element.setAttribute('aria-hidden', 'true'));
-       this.carousel.children[this.currentSlide].setAttribute('aria-hidden', 'false');
+        Array.from(this.carousel.children).forEach(element => element.setAttribute('aria-hidden', 'true'));
+        this.carousel.children[this.currentSlide].setAttribute('aria-hidden', 'false');
         Array.from(this.slidePoints.querySelectorAll('div')).forEach(element => element.classList.remove('currentPoint'));
         this.slidePoints.querySelector(':nth-child(' + (this.currentSlide + 1) + ')').classList.add('currentPoint')
     }
 
     startAnimation(e) {
         //check for touch swipe
-        if(e && e.touches && this.isSwipe) {
+        if (e && e.touches && this.isSwipe) {
             this.isSwipe = false;
             const touchDistance = this.touchPointEnd - this.touchPointStart;
-            if(touchDistance > 50) {
+            if (touchDistance > 50) {
                 this.onNavClick(true);
             }
-            else if(touchDistance < -50) {
+            else if (touchDistance < -50) {
                 this.onNavClick(false);
             }
         }
         this.animationInterval = setInterval(_ => {
-            const translateBy = this.carouselParent.offsetWidth;
-            if(this.currentSlide >= this.totalSlides) {
-                this.currentSlide = 0;
+            try {
+                const translateBy = this.carouselParent.offsetWidth;
+                if (this.currentSlide >= this.totalSlides) {
+                    this.currentSlide = 0;
+                }
+                else {
+                    this.currentSlide++;
+                }
+                this.showHideNav();
+                this.carousel.style.left = `-${this.currentSlide * translateBy}px`;
             }
-            else {
-                this.currentSlide++;
+            catch (e) {
+                clearInterval(this.animationInterval);
             }
-            this.showHideNav();
-            this.carousel.style.left = `-${this.currentSlide * translateBy}px`;
         }, 5000);
     }
 
     stopAnimation(e) {
         clearInterval(this.animationInterval);
         // check for touch swipe
-        if(e && e.touches && e.touches.length) {
+        if (e && e.touches && e.touches.length) {
             this.touchPointStart = e.touches[0].pageX;
         }
     }

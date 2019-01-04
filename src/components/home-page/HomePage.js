@@ -5,8 +5,9 @@ import Carousel from './../carousel/Carousel';
 import Banner from './../banner/Banner';
 import Category from './../category/Category';
 import CartDetails from './../cart-details/CartDetails';
+import serviceHandler from './../service-handler/ServiceHandler';
 
-export default class HomePage {
+ class HomePage {
     constructor(props) {
         this.props = props;
         this.parent = props.parent;
@@ -50,3 +51,5 @@ export default class HomePage {
         this.cartDetails = new CartDetails({parent: this.cartDetailsCntr});
     }
 }
+
+export default serviceHandler(HomePage);

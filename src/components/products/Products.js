@@ -4,8 +4,9 @@ import ShoppingFooter from './../shopping-footer/ShoppingFooter';
 import Product from './../product/Product';
 import { addEvents } from './../../services/Utils';
 import CartDetails from './../cart-details/CartDetails';
+import serviceHandler from './../service-handler/ServiceHandler';
 
-export default class Products {
+class Products {
     constructor(props) {
         this.props = props;
         this.parent = props.parent;
@@ -191,3 +192,5 @@ export default class Products {
 
     }
 }
+
+export default serviceHandler(Products);
