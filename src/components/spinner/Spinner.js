@@ -7,7 +7,7 @@ export default class Spinner {
 
     render() {
         const markup = `
-            <div class = 'loaderParent'>
+            <div class = 'loader-parent'>
                 <div class = 'backdrop'></div>
                 <div class = 'loader'></div>
             </div>

@@ -6,11 +6,11 @@ export default class CartItem {
         this.props = props;
         this.render();
         addEvents({
-            '.decreaseButton': {
+            '.decrease-button': {
                 name: 'click',
                 handler: _ => this.decreaseItem()
             },
-            '.increaseButton': {
+            '.increase-button': {
                 name: 'click',
                 handler: _ => this.increaseItem()
             }
@@ -44,9 +44,9 @@ export default class CartItem {
                 <div class = 'flex flex--v flex1'>
                     <h3 class = 'mb1'>${item.name}</h3> 
                     <div class = 'flex dark-txt'>
-                        <button aria-label = 'decrease item quantity' class = 'decreaseButton mr1'></button>
+                        <button aria-label = 'decrease item quantity' class = 'decrease-button mr1'></button>
                         <div class = 'quantity mr1'>${item.quantity}</div>
-                        <button aria-label = 'increase item quantity' class = 'increaseButton mr1'></button>
+                        <button aria-label = 'increase item quantity' class = 'increase-button mr1'></button>
                         <div class = 'mr1'>&#10006;</div>
                         <div>Rs.${item.price}</div>
                         <div class = 'lg-txt cart-item__total'>
@@ -61,6 +61,6 @@ export default class CartItem {
         this.element = this.props.parent.querySelector(`#cart-item${this.props.key}`);
         this.quantity = this.element.querySelector('.quantity');
         this.total = this.element.querySelector('.cart-item__total');
-        this.decreaseBtn = this.element.querySelector('.decreaseButton');
+        this.decreaseBtn = this.element.querySelector('.decrease-button');
     }
 }

@@ -48,13 +48,13 @@ export default class ShoppingHeader {
                         <li tabindex = 0 role = 'link' id = 'products' route = '/products'>Products</li>
                     </ul>
                 </nav>
-                <div class = cartBtnCntnr>
-                    <div class = btnCntnr>
+                <div class = cart-btn-cntnr>
+                    <div class = btn-cntnr>
                         <button id = 'sign-in' route = '/login' class = cart__button>Signin</button>
                         <button id = 'register' route = '/signup' class = cart__button>Register</button>
                     </div>
                     <button class = 'cart' id = 'cart'>
-                        <div class = cartImage></div>
+                        <div class = cart-image></div>
                         <div><span id = 'cartItems'>${shoppingService.cartItemsLength || 0}</span><span id = 'itemsTxt'> items</span></div>
                     </button>
                 </div>

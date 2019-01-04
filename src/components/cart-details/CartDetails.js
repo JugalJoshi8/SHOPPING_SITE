@@ -9,7 +9,7 @@ export default class CartDetails {
         shoppingService.addCartSubscriber(this.onCartUpdate.bind(this));
         this.render();
         addEvents({
-            '.closeButton, #checkout, #start-shopping': {
+            '.close-button, #checkout, #start-shopping': {
                 'name': 'click',
                 'handler': _ =>  { 
                     this.overlay.classList.add('scale0');
@@ -55,7 +55,7 @@ export default class CartDetails {
                 <div class = 'cart-dtls flex flex--v'>
                     <header class="cart-dtls__header pt1 pb1 pl1 pr1 flex flex--jsb">
                         <h1 class = 'cart-header lg-txt bold-txt'>My Cart ${cartItemsLength ? (cartItemsLength > 1 ? `<span class = 'md-txt normal-txt'>(${cartItemsLength} items)</span>` : '<span class = "md-txt normal-txt">(1 item)</span>') : ''}</h2>
-                        <button aria-label = 'Close Cart Details' class = 'closeButton'>
+                        <button aria-label = 'Close Cart Details' class = 'close-button'>
                         </button>
                     </header>
                     <div id = 'full-cart' class = 'flex flex1 flex--v'>
@@ -92,7 +92,7 @@ export default class CartDetails {
         this.totalPrice = this.props.parent.querySelector('.total-price');
         this.cart = this.props.parent.querySelector('#full-cart');
         this.emptyCart = this.props.parent.querySelector('#empty-cart');
-        this.closeBtn = this.props.parent.querySelector('.closeButton');
+        this.closeBtn = this.props.parent.querySelector('.close-button');
         if(items.length) {
             this.cart.classList.remove('hide');
             this.emptyCart.classList.add('hide');
