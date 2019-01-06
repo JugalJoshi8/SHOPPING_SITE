@@ -64,7 +64,7 @@ export default class CartDetails {
                         <div class = 'flex1 o-auto'>
                             <ul class = 'cart-items pt1 flex1'>
                             </ul>
-                            <div class = 'cart-dtls__cheap ml1 mr1 mb1 pt1 pb1 white-bg'>Tou won't find it cheaper anywhere</div>
+                            <div class = 'cart-dtls__cheap ml1 mr1 mb1 pt1 pb1 white-bg'>You won't find it cheaper anywhere</div>
                         </div>
                         <div class = 'white-bg dark-txt p1 cart-dtls__checkout center-txt'>
                             <div class = 'mb1'>Promo code can be applied on payment page</div>
