@@ -44,14 +44,14 @@ export default class ShoppingHeader {
                 <div class=logo></div>
                 <nav>
                     <ul>
-                        <li><button tabindex = 0 role = 'link' id = 'home' route = '/homepage'>Home</button></li>
-                        <li><button tabindex = 0 role = 'link' id = 'products' route = '/products'>Products</button></li>
+                        <li><button class = 'md-txt' tabindex = 0 role = 'link' id = 'home' route = '/homepage'>Home</button></li>
+                        <li><button class = 'md-txt' tabindex = 0 role = 'link' id = 'products' route = '/products'>Products</button></li>
                     </ul>
                 </nav>
                 <div class = cart-btn-cntnr>
                     <div class = btn-cntnr>
-                        <button id = 'sign-in' route = '/login' class = cart__button>Signin</button>
-                        <button id = 'register' route = '/signup' class = cart__button>Register</button>
+                        <button class = 'md-txt' id = 'sign-in' route = '/login' class = cart__button>Signin</button>
+                        <button class = 'md-txt' id = 'register' route = '/signup' class = cart__button>Register</button>
                     </div>
                     <button class = 'cart' id = 'cart'>
                         <div class = cart-image></div>
