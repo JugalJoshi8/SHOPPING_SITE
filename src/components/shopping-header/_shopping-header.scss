@@ -34,6 +34,10 @@
     line-height: 30px;
     font-weight: bold;
     color: $light-dark;
+    button {
+      background-color: transparent;
+      border: none;
+    }
   }
 
   .logo {

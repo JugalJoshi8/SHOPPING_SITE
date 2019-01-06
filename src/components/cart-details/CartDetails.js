@@ -14,7 +14,7 @@ export default class CartDetails {
                 'handler': _ =>  { 
                     this.overlay.classList.add('scale0');
                     this.overlay.setAttribute('aria-hidden', 'true');
-                    this.previousActiveElement.focus();
+                    this.previousActiveElement && this.previousActiveElement.focus();
                 }
             }
         }, this.props.parent);

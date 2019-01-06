@@ -44,8 +44,8 @@ export default class ShoppingHeader {
                 <div class=logo></div>
                 <nav>
                     <ul>
-                        <li tabindex = 0 role = 'link' id = 'home' route = '/homepage'>Home</li>
-                        <li tabindex = 0 role = 'link' id = 'products' route = '/products'>Products</li>
+                        <li><button tabindex = 0 role = 'link' id = 'home' route = '/homepage'>Home</button></li>
+                        <li><button tabindex = 0 role = 'link' id = 'products' route = '/products'>Products</button></li>
                     </ul>
                 </nav>
                 <div class = cart-btn-cntnr>
