@@ -129,7 +129,7 @@ export default class Carousel {
             catch (e) {
                 clearInterval(this.animationInterval);
             }
-        }, 3000);
+        }, 4000);
     }
 
     stopAnimation(e) {
