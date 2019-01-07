@@ -138,8 +138,8 @@ class Products {
             this.filteredProducts = this.products.filter(product => product.category === categoryId);
         }
         this.productCntr.innerHTML = '';
-        this.filteredProducts.forEach(product => {
-            new Product({ parent: this.productCntr, product, addProductToCart: this.addProductToCart });
+        this.filteredProducts.forEach((product, index) => {
+            new Product({ parent: this.productCntr, product, addProductToCart: this.addProductToCart, key: index });
         });
         this.categoryOptions.setAttribute('tabindex', '-1');
         this.categorySelect.focus();
